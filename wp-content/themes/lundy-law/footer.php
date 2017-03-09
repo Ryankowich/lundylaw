@@ -120,7 +120,6 @@
 			<!-- end of footer-top -->
 
 			<div class="footer-bottom">
-
 <br/>Lundy Law does business in Pennsylvania and New Jersey as a Pennsylvania Limited Liability Partnership, and in Delaware as a Limited Liability Company. 
 <br/>Legal services in Pennsylvania shall be performed primarily in Philadelphia; New Jersey in Cherry Hill and Delaware in Wilmington. Cases may referred to associated law firms.
 				<div class="shell">
@@ -137,6 +136,7 @@
 						echo wpautop( $copy );
 					} ?>					
 				</div>
+				<?php echo do_shortcode('[gtranslate]'); ?>
 			</div>
 			<!-- end of footer-bottom -->
 		</div>
