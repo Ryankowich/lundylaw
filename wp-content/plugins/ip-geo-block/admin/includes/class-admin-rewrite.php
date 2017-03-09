@@ -8,7 +8,6 @@ class IP_Geo_Block_Admin_Rewrite {
 
 	// private values
 	private $doc_root = NULL; // document root
-	private $site_uri = NULL; // network site uri
 	private $base_uri = NULL; // plugins base uri
 	private $wp_dirs  = array();
 
@@ -57,7 +56,6 @@ class IP_Geo_Block_Admin_Rewrite {
 	public function __construct() {
 		// http://stackoverflow.com/questions/25017381/setting-php-document-root-on-webserver
 		$this->doc_root = str_replace( $_SERVER['SCRIPT_NAME'], '', $_SERVER['SCRIPT_FILENAME'] );
-		$this->site_uri = untrailingslashit( parse_url( network_site_url(), PHP_URL_PATH ) );
 		$this->base_uri = str_replace( $this->doc_root, '', IP_GEO_BLOCK_PATH );
 
 		// target directories
@@ -305,9 +303,11 @@ class IP_Geo_Block_Admin_Rewrite {
 
 		foreach ( array_keys( $rewrite->rewrite_rule['apache'] ) as $key ) {
 			if ( $options[ $key ] )
+				// if it fails to write, then return FALSE
 				$options[ $key ] = $rewrite->add_rewrite_rule( $key ) ? TRUE : FALSE;
 			else
-				$options[ $key ] = $rewrite->del_rewrite_rule( $key ) ? FALSE : TRUE;
+				// regardless of the result, return FALSE
+				$options[ $key ] = $rewrite->del_rewrite_rule( $key ) ? FALSE : FALSE;
 		}
 
 		return $options;
@@ -334,7 +334,7 @@ class IP_Geo_Block_Admin_Rewrite {
 	 */
 	public static function get_dirs() {
 		$rewrite = self::get_instance();
-		return $rewrite->wp_dirs;
+		return str_replace( $rewrite->doc_root, '', $rewrite->wp_dirs );
 	}
 
 }

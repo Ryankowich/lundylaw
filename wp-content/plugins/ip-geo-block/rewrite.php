@@ -5,16 +5,16 @@
  * @package   IP_Geo_Block
  * @author    tokkonopapa <tokkonopapa@yahoo.com>
  * @license   GPL-2.0+
- * @link      https://github.com/tokkonopapa
+ * @link      http://www.ipgeoblock.com/
  * @copyright 2013-2016 tokkonopapa
  *
  * THIS IS FOR THE ADVANCED USERS:
- * This file is for WP-ZEP. If a php file in the plugin/theme directory accepts
- * some malicious requests directly without loading WP core, then validation by
- * WP-ZEP will be bypassed. To avoid such a bypassing, those requests should be
- * redirected to this file in order to load WP core. The `.htaccess` in the
- * plugin/theme directory will help this redirection if it will be configured
- * as follows (for apache):
+ * This file is for WP-ZEP. If some php files in the plugins/themes directory
+ * accept malicious requests directly without loading WP core, then validation
+ * by WP-ZEP will be bypassed. To avoid such bypassing, those requests should
+ * be redirected to this file in order to load WP core. The `.htaccess` in the
+ * plugins/themes directory will help this redirection if it is configured as
+ * follows (for apache):
  *
  * # BEGIN IP Geo Block
  * <IfModule mod_rewrite.c>
@@ -27,7 +27,7 @@
  *
  * The redirected requests will be verified against the certain attack patterns
  * such as null byte attack or directory traversal, and then load the WordPress
- * core module through wp-load.php to triger WP-ZEP. If it ends up successfully,
+ * core module through wp-load.php to triger WP-ZEP. If it ends up successfully
  * this includes the originally requested php file to excute it.
  */
 
@@ -53,6 +53,22 @@ class IP_Geo_Block_Rewrite {
 	}
 
 	/**
+	 * WP alternative function for advanced-cache.php
+	 *
+	 * Normalize a filesystem path.
+	 * @source: wp-includes/functions.php
+	 */
+	private static function normalize_path( $path ) {
+		$path = str_replace( '\\', '/', $path );
+		$path = preg_replace( '|(?<=.)/+|', '/', $path );
+
+		if ( ':' === substr( $path, 1, 1 ) )
+			$path = ucfirst( $path );
+
+		return $path;
+	}
+
+	/**
 	 * Post process (never return)
 	 *
 	 */
@@ -62,30 +78,32 @@ class IP_Geo_Block_Rewrite {
 		$validate['result'] = 'blocked'; //'malice';
 
 		// (1) blocked, unknown, (3) unauthenticated, (5) all
-		if ( (int)$settings['validation']['reclogs'] & 1 ) {
-			include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-logs.php' );
+		if ( (int)$settings['validation']['reclogs'] & 1 )
 			IP_Geo_Block_Logs::record_logs( 'admin', $validate, $settings );
-		}
 
 		// update statistics
-		if ( $settings['save_statistics'] ) {
-			include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-logs.php' );
+		if ( $settings['save_statistics'] )
 			IP_Geo_Block_Logs::update_stat( 'admin', $validate, $settings );
+
+		// compose status code and message
+		if ( ! $exist && 404 != $settings['response_code'] ) {
+			$settings['response_code'] = 404;
+			$settings['response_msg' ] = 'Not Found';
 		}
 
 		// send response code to refuse
-		$context->send_response( 'admin', $exist ? $settings['response_code'] : 404 );
+		$context->send_response( 'admin', $settings );
 	}
 
 	/**
 	 * Validation of direct excution
 	 *
-	 * @note: This function doesn't care about malicious query string.
+	 * Note: This function doesn't care about malicious query string.
 	 */
 	public static function exec( $context, $validate, $settings ) {
 
 		// get document root
-		// @note: super global can not be infected even when `register_globals` is on.
+		// Note: super global can not be infected even when `register_globals` is on.
 		// @see wp-admin/network.php, get_home_path() in wp-admin/includes/file.php
 		// @link http://php.net/manual/en/security.globals.php
 		// @link http://php.net/manual/en/reserved.variables.php#63831
@@ -99,13 +117,13 @@ class IP_Geo_Block_Rewrite {
 
 		// get absolute path of requested uri
 		// @link http://davidwalsh.name/iis-php-server-request_uri
-		$path = ( $root = wp_normalize_path( $root ) ) . parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
+		$path = ( $root = self::normalize_path( $root ) ) . parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
 
 		// while malicios URI may be intercepted by the server,
 		// null byte attack should be invalidated just in case.
-		// @note: is_file(), is_readable(), file_exists() need a valid path.
-		// @link: http://php.net/releases/5_3_4.php, https://bugs.php.net/bug.php?id=39863
-		// ex) $path = "/etc/passwd\0.php"; is_file( $path ) === true (5.2.14), false (5.4.4)
+		// Note: is_file(), is_readable(), file_exists() need a valid path.
+		// @link http://php.net/releases/5_3_4.php, https://bugs.php.net/bug.php?id=39863
+		// @example $path = "/etc/passwd\0.php"; is_file( $path ) === true (5.2.14), false (5.4.4)
 		$path = self::realpath( str_replace( "\0", '', $path ) );
 
 		// check path if under the document root
@@ -119,7 +137,7 @@ class IP_Geo_Block_Rewrite {
 			$path .= 'index.php';
 
 		// check file extention
-		// @note: if it fails, rewrite rule may be misconfigured
+		// if it fails, rewrite rule may be misconfigured
 		if ( FALSE === strripos( strtolower( $path ), '.php', -4 ) )
 			self::abort( $context, $validate, $settings, file_exists( $path ) );
 
@@ -133,7 +151,7 @@ class IP_Geo_Block_Rewrite {
 }
 
 // this will trigger `init` action hook
-include_once '../../../wp-load.php';
+require_once '../../../wp-load.php';
 
 /**
  * Fallback execution
@@ -143,12 +161,12 @@ include_once '../../../wp-load.php';
  * as a fallback.
  */
 if ( ! class_exists( 'IP_Geo_Block' ) )
-	include_once dirname( __FILE__ ) . '/ip-geo-block.php';
+	require_once dirname( __FILE__ ) . '/ip-geo-block.php';
 
 IP_Geo_Block_Rewrite::exec(
 	IP_Geo_Block::get_instance(),
 	IP_Geo_Block::get_geolocation(),
-	IP_Geo_Block::get_option( 'settings' )
+	IP_Geo_Block::get_option()
 );
 
 endif; /* ! class_exists( 'IP_Geo_Block_Rewrite' ) */
@@ -197,7 +215,7 @@ endif; /* ! class_exists( 'IP_Geo_Block_Rewrite' ) */
  * RewriteRule ^.*\.php$ rewrite.php [L]
  * </IfModule>
  * # END IP Geo Block
- * 
+ *
  * 2. `/wordpress/wp-content/themes/.htaccess`
  *
  * # BEGIN IP Geo Block

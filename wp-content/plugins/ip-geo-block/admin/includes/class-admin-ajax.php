@@ -6,12 +6,12 @@ class IP_Geo_Block_Admin_Ajax {
 	 *
 	 */
 	static public function search_ip( $which ) {
-		include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-apis.php' );
+		require_once IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-lkup.php';
 
 		// check format
 		if ( filter_var( $ip = $_POST['ip'], FILTER_VALIDATE_IP ) ) {
 			// get option settings and compose request headers
-			$options = IP_Geo_Block::get_option( 'settings' );
+			$options = IP_Geo_Block::get_option();
 			$args    = IP_Geo_Block::get_request_headers( $options );
 
 			// create object for provider and get location
@@ -25,6 +25,9 @@ class IP_Geo_Block_Admin_Ajax {
 			$res = array( 'errorMessage' => 'Invalid IP address.' );
 		}
 
+		if ( empty( $res['errorMessage'] ) )
+			$res['host'] = IP_Geo_Block_Lkup::gethostbyaddr( $ip );
+
 		return $res;
 	}
 
@@ -33,11 +36,9 @@ class IP_Geo_Block_Admin_Ajax {
 	 *
 	 */
 	static public function scan_country() {
-		include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-apis.php' );
-
 		// scan all the country code using selected APIs
 		$ip        = IP_Geo_Block::get_ip_address();
-		$options   = IP_Geo_Block::get_option( 'settings' );
+		$options   = IP_Geo_Block::get_option();
 		$args      = IP_Geo_Block::get_request_headers( $options );
 		$type      = IP_Geo_Block_Provider::get_providers( 'type', FALSE, FALSE );
 		$providers = IP_Geo_Block_Provider::get_valid_providers( $options['providers'], FALSE, FALSE );
@@ -83,9 +84,6 @@ class IP_Geo_Block_Admin_Ajax {
 	 *
 	 */
 	static public function export_logs( $which ) {
-		include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-util.php' );
-		include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-logs.php' );
-
 		$csv = '';
 		$which = IP_Geo_Block_Logs::restore_logs( $which );
 		$date = isset( $which[0] ) ? $which[0][1] : $_SERVER['REQUEST_TIME'];
@@ -101,7 +99,7 @@ class IP_Geo_Block_Admin_Ajax {
 		// Send as file
 		header( 'Content-Description: File Transfer' );
 		header( 'Content-Type: application/octet-stream' );
-		header( 'Content-Disposition: attachment; filename="' . IP_Geo_Block::PLUGIN_SLUG . '_' . $date . '.csv"' );
+		header( 'Content-Disposition: attachment; filename="' . IP_Geo_Block::PLUGIN_NAME . '_' . $date . '.csv"' );
 		header( 'Pragma: public' );
 		header( 'Expires: 0' );
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
@@ -114,9 +112,6 @@ class IP_Geo_Block_Admin_Ajax {
 	 *
 	 */
 	static public function restore_logs( $which ) {
-		include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-util.php' );
-		include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-logs.php' );
-
 		// if js is slow then limit the number of rows
 		$list = array();
 		$limit = IP_Geo_Block_Logs::limit_rows( @$_POST['time'] );
@@ -130,17 +125,23 @@ class IP_Geo_Block_Admin_Ajax {
 		foreach ( $list as $hook => $rows ) {
 			$html = '';
 			$n = 0;
+
 			foreach ( $rows as $row ) {
 				$log = (int)array_shift( $row );
 				$html .= '<tr><td data-value='.$log.'>';
 				$html .= IP_Geo_Block_Util::localdate( $log, 'Y-m-d H:i:s' ) . "</td>";
+
+				$log = array_shift( $row );
+				$html .= '<td><a href="#!">' . esc_html( $log ) . '</a></td>';
+
 				foreach ( $row as $log ) {
-					$log = esc_html( $log );
-					$html .= "<td>$log</td>";
+					$html .= '<td>' . esc_html( $log ) . '</td>';
 				}
+
 				$html .= "</tr>";
 				if ( ++$n >= $limit ) break;
 			}
+
 			$res[ $hook ] = $html;
 		}
 
@@ -152,6 +153,7 @@ class IP_Geo_Block_Admin_Ajax {
 	 *
 	 */
 	static public function validate_settings( $parent ) {
+		// restore escaped characters (see wp_magic_quotes() in wp-includes/load.php)
 		$json = str_replace(
 			array( '\\"', '\\\\', "'"  ),
 			array( '"',   '\\',   '\"' ),
@@ -163,7 +165,13 @@ class IP_Geo_Block_Admin_Ajax {
 
 		// Sanitize to fit the type of each field
 		$temp = self::json_to_settings( $data );
-		$temp = $parent->validate_options( 'settings', $temp );
+
+		// Integrate posted data into current settings because if can be a part of hole data
+		unset( $temp['version'] );
+		$temp = array_replace_recursive( IP_Geo_Block::get_option(), $temp );
+
+		// Validate options and convert to json
+		$temp = $parent->validate_options( $temp );
 		$data = self::settings_to_json( $temp );
 		$json = self::json_unsafe_encode( $data );
 
@@ -174,7 +182,7 @@ class IP_Geo_Block_Admin_Ajax {
 		// Send json as file
 		header( 'Content-Description: File Transfer' );
 		header( 'Content-Type: application/octet-stream' );
-		header( 'Content-Disposition: attachment; filename="' . IP_Geo_Block::PLUGIN_SLUG . '-settings.json"' );
+		header( 'Content-Disposition: attachment; filename="' . IP_Geo_Block::PLUGIN_NAME . '-settings.json"' );
 		header( 'Pragma: public' );
 		header( 'Expires: 0' );
 		header( 'Cache-Control: no-store, no-cache, must-revalidate' );
@@ -188,7 +196,7 @@ class IP_Geo_Block_Admin_Ajax {
 	 */
 	static private function json_to_settings( $input ) {
 		$settings = array();
-		$prfx = 'ip_geo_block_settings';
+		$prfx = IP_Geo_Block::OPTION_NAME;
 
 		foreach ( $input as $key => $val ) {
 			if ( preg_match( "/${prfx}\[(.+?)\](?:\[(.+?)\](?:\[(.+?)\])?)?/", $key, $m ) ) {
@@ -230,22 +238,52 @@ class IP_Geo_Block_Admin_Ajax {
 			'[extra_ips][white_list]',
 			'[extra_ips][black_list]',
 			'[signature]',
-			'[response_code]',
 			'[login_fails]',
+			'[response_code]',
+			'[response_msg]',            // 3.0.0
+			'[redirect_uri]',            // 3.0.0
+			'[validation][timing]',      // 2.2.9
 			'[validation][proxy]',
 			'[validation][comment]',
 			'[validation][xmlrpc]',
 			'[validation][login]',
+			'[login_action][login]',        // 2.2.8
+			'[login_action][register]',     // 2.2.8
+			'[login_action][resetpasss]',   // 2.2.8
+			'[login_action][lostpassword]', // 2.2.8
+			'[login_action][postpass]',     // 2.2.8
 			'[validation][admin][1]',
 			'[validation][admin][2]',
 			'[validation][ajax][1]',
 			'[validation][ajax][2]',
 			'[validation][plugins]',
 			'[validation][themes]',
+			'[validation][includes]',    // 3.0.0
+			'[validation][uploads]',     // 3.0.0
+			'[validation][languages]',   // 3.0.0
+			'[validation][public]',      // 3.0.0
 			'[rewrite][plugins]',
 			'[rewrite][themes]',
+			'[rewrite][includes]',       // 3.0.0
+			'[rewrite][uploads]',        // 3.0.0
+			'[rewrite][languages]',      // 3.0.0
 			'[exception][plugins][*]',   // 2.2.5
 			'[exception][themes][*]',    // 2.2.5
+			'[exception][admin][$]',     // 3.0.0
+			'[exception][public][$]',    // 3.0.0
+			'[exception][includes][$]',  // 3.0.0
+			'[exception][uploads][$]',   // 3.0.0
+			'[exception][languages][$]', // 3.0.0
+			'[public][matching_rule]',   // 3.0.0
+			'[public][white_list]',      // 3.0.0
+			'[public][black_list]',      // 3.0.0
+			'[public][target_rule]',     // 3.0.0
+			'[public][target_pages][$]', // 3.0.0
+			'[public][target_posts][$]', // 3.0.0
+			'[public][target_cates][$]', // 3.0.0
+			'[public][target_tags][$]',  // 3.0.0
+			'[public][ua_list]',         // 3.0.0
+			'[public][simulate]',        // 3.0.0
 			'[providers][Maxmind]',
 			'[providers][IP2Location]',
 			'[providers][freegeoip.net]',
@@ -253,22 +291,27 @@ class IP_Geo_Block_Admin_Ajax {
 			'[providers][IP-Json]',
 			'[providers][Nekudo]',
 			'[providers][Xhanch]',
-			'[providers][geoPlugin]',
+			'[providers][GeoIPLookup]',  // 2.2.8
 			'[providers][ip-api.com]',
 			'[providers][IPInfoDB]',
 			'[save_statistics]',
 			'[validation][reclogs]',
+			'[validation][recdays]',     // 2.2.9
+			'[validation][maxlogs]',
 			'[validation][postkey]',
 			'[update][auto]',
 			'[anonymize]',
+			'[cache_time_gc]',           // 3.0.0
 			'[cache_hold]',
 			'[cache_time]',
 			'[comment][pos]',
 			'[comment][msg]',
 			'[clean_uninstall]',
+			'[api_key][GoogleMap]',      // 2.2.7
+			'[network_wide]',            // 3.0.0
 		);
 		$json = array();
-		$prfx = 'ip_geo_block_settings';
+		$prfx = IP_Geo_Block::OPTION_NAME;
 
 		foreach ( $keys as $key ) {
 			if ( preg_match( "/\[(.+?)\](?:\[(.+?)\](?:\[(.+?)\])?)?/", $key, $m ) ) {
@@ -296,8 +339,12 @@ class IP_Geo_Block_Admin_Ajax {
 							strval( $input[  $m[1]  ][  $m[2]  ] ) & (int)$m[3];
 					}
 					elseif ( isset( $input[ $m[1] ][ $m[2] ] ) ) {
-						foreach ( $input[ $m[1] ][ $m[2] ] as $val ) {
-							$json[ $prfx.'['.$m[1].']['.$m[2].']'.'['.$val.']' ] = 1;
+						if ( '*' === $m[3] ) {
+							foreach ( $input[ $m[1] ][ $m[2] ] as $val ) {
+								$json[ $prfx.'['.$m[1].']['.$m[2].']'.'['.$val.']' ] = 1;
+							}
+						} elseif ( is_array( $input[ $m[1] ][ $m[2] ] ) ) {
+							$json[ $prfx.'['.$m[1].']['.$m[2].']' ] = implode( ',', $input[ $m[1] ][ $m[2] ] );
 						}
 					}
 					break;
@@ -324,13 +371,15 @@ class IP_Geo_Block_Admin_Ajax {
 				    'postkey'     => 'action,comment,log,pwd', // Keys in $_POST
 				    'plugins'     => 2,       // Validate on wp-content/plugins
 				    'themes'      => 2,       // Validate on wp-content/themes
+				    'timing'      => 1,       // 0:init, 1:mu-plugins, 2:drop-in
 				),
-				'signature'       => "..,/wp-config.php,/passwd,curl,wget\nselect:.5,where:.5,union:.5\ncreate:.6,password:.4,load_file:.5",
+				'signature'       => "../,/wp-config.php,/passwd\ncurl,wget,eval,base64\nselect:.5,where:.5,union:.5\nload_file:.5,create:.6,password:.4",
 				'rewrite'         => array(   // Apply rewrite rule
 				    'plugins'     => TRUE,    // for wp-content/plugins
 				    'themes'      => TRUE,    // for wp-content/themes
 				),
-			), FALSE // should not overwrite the existing parameters
+			),
+			FALSE // should not overwrite the existing parameters
 		);
 	}
 
@@ -344,11 +393,12 @@ class IP_Geo_Block_Admin_Ajax {
 			else
 				$json = json_encode( $data, $opts );
 		}
-		else { // Some options are not supported in PHP 5.3 and under
+
+		else { // JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES are not supported in PHP 5.3 and under
 			$json = self::json_unescaped_unicode( $data );
-			$json = str_replace(
-				array( '{"', '","', '"}', '\\/' ), // JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-				array( '{'.PHP_EOL.'    "', '",'.PHP_EOL.'    "', '"'.PHP_EOL.'}', '/' ),
+			$json = preg_replace(
+				array( '!{"!',              '!":!', '!("?),"!',            '!"}!',          '!\\\\/!' ),
+				array( '{'.PHP_EOL.'    "', '": ',  '$1,'.PHP_EOL.'    "', '"'.PHP_EOL.'}', '/'       ),
 				$json
 			);
 		}
@@ -370,9 +420,67 @@ class IP_Geo_Block_Admin_Ajax {
 	// Fallback function for PHP 5.3 and under
 	static private function convert_encoding( $matches ) {
 		return mb_convert_encoding(
-			pack( 'H*', str_replace( '\\u', '', $matches[0] ) ),
-			'UTF-8', 'UTF-16'
+			pack( 'H*', str_replace( '\\u', '', $matches[0] ) ), 'UTF-8', 'UTF-16'
 		);
+	}
+
+	static public function get_wp_info() {
+		// PHP, WordPress
+		$res = array();
+		$res[] = array( 'PHP' => PHP_VERSION );
+		$res[] = array( 'BC Math' => (extension_loaded('gmp') ? 'gmp ' : '') . (function_exists('bcadd') ? 'yes' : 'no') );
+		$res[] = array( 'mb_strcut' => function_exists( 'mb_strcut' ) ? 'yes' : 'no' );
+		$res[] = array( 'WordPress' => $GLOBALS['wp_version'] );
+		$res[] = array( 'Multisite' => is_multisite() ? 'yes' : 'no' );
+
+		// Child and parent themes
+		$activated = wp_get_theme(); // @since 3.4.0
+		$res[] = array( esc_html( $activated->get( 'Name' ) ) => esc_html( $activated->get( 'Version' ) ) );
+
+		if ( $installed = $activated->get( 'Template' ) ) {
+			$activated = wp_get_theme( $installed );
+			$res[] = array( esc_html( $activated->get( 'Name' ) ) => esc_html( $activated->get( 'Version' ) ) );
+		}
+
+		// Plugins
+		$installed = get_plugins(); // @since 1.5.0
+		$activated = get_site_option( 'active_sitewide_plugins' ); // @since 2.8.0
+		! is_array( $activated ) and $activated = array();
+		$activated = array_merge( $activated, array_fill_keys( get_option( 'active_plugins' ), TRUE ) );
+
+		foreach ( $installed as $key => $val ) {
+			if ( isset( $activated[ $key ] ) ) {
+				$res[] = array(
+					esc_html( $val['Name'] ) => esc_html( $val['Version'] )
+				);
+			}
+		}
+
+		// Logs (hook, time, ip, code, result, method, user_agent, headers, data)
+		$installed = IP_Geo_Block_Logs::search_logs( IP_Geo_Block::get_ip_address() );
+
+		foreach ( array_reverse( $installed ) as $val ) {
+			// hide port and nonce
+			$method = preg_replace( '/\[\d+\]/', '', $val['method'] );
+			$method = preg_replace( '/(' . IP_Geo_Block::PLUGIN_NAME . '-auth-nonce)(?:=|%3D)([\w]+)/', '$1=...', $method );
+
+			// add post data
+			$query = array();
+			foreach ( explode( ',', $val['data'] ) as $str ) {
+				if ( FALSE !== strpos( $str, '=' ) )
+					$query[] = $str;
+			}
+
+			if ( ! empty( $query ) )
+				$method .= '(' . implode( ',', $query ) . ')';
+
+			$res[] = array(
+				esc_html( IP_Geo_Block_Util::localdate( $val['time'], 'Y-m-d H:i:s' ) ) =>
+				esc_html( str_pad( $val['result'], 8 ) . $method )
+			);
+		}
+
+		return $res;
 	}
 
 }

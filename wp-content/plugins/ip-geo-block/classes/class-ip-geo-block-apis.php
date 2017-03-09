@@ -115,7 +115,7 @@ abstract class IP_Geo_Block_API {
 
 		  // decode xml
 		  case 'xml':
-			$tmp = '/\<(.+?)\>(?:\<\!\[CDATA\[)?(.*?)(?:\]\]\>)?\<\/\\1\>/i';
+			$tmp = '/\<(.+?)\>(?:\<\!\[CDATA\[)?([^\>]*?)(?:\]\]\>)?\<\/\\1\>/i';
 			if ( preg_match_all( $tmp, $res, $matches ) !== FALSE ) {
 				if ( is_array( $matches[1] ) && ! empty( $matches[1] ) ) {
 					foreach ( $matches[1] as $key => $val ) {
@@ -276,43 +276,6 @@ class IP_Geo_Block_API_ipinfoio extends IP_Geo_Block_API {
 }
 
 /**
- * Class for IP-Json
- *
- * URL         : http://ip-json.rhcloud.com/
- * Term of use : 
- * Licence fee : free
- * Rate limit  : 
- * Sample URL  : http://ip-json.rhcloud.com/xml/124.83.187.140
- * Sample URL  : http://ip-json.rhcloud.com/v6/2a00:1210:fffe:200::1
- * Input type  : IP address (IPv4, IPv6) / domain name
- * Output type : json, xml, csv
- */
-class IP_Geo_Block_API_IPJson extends IP_Geo_Block_API {
-	protected $template = array(
-		'type' => IP_GEO_BLOCK_API_TYPE_BOTH,
-		'url' => 'http://ip-json.rhcloud.com/%API_FORMAT%/%API_IP%',
-		'api' => array(
-			'%API_FORMAT%' => 'json',
-		),
-		'transform' => array(
-			'errorMessage' => 'error',
-			'countryCode'  => 'country_code',
-			'countryName'  => 'country_name',
-			'regionName'   => 'region_name',
-			'cityName'     => 'city',
-			'latitude'     => 'latitude',
-			'longitude'    => 'longitude',
-		)
-	);
-
-	public function get_location( $ip, $args = array() ) {
-		if ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) )
-			$this->template['api']['%API_FORMAT%'] = 'v6';
-		return parent::get_location( $ip, $args );
-	}
-}
-
-/**
  * Class for Nekudo
  *
  * URL         : http://geoip.nekudo.com/
@@ -382,30 +345,28 @@ class IP_Geo_Block_API_Xhanch extends IP_Geo_Block_API {
 }
 
 /**
- * Class for geoPlugin
+ * Class for GeoIPLookup.net
  *
- * URL         : http://www.geoplugin.com/
- * Term of use : http://www.geoplugin.com/whyregister
- * Licence fee : free (need an attribution link)
- * Rate limit  : 120 lookups per minute
- * Sample URL  : http://www.geoplugin.net/json.gp?ip=2a00:1210:fffe:200::1
+ * URL         : http://geoiplookup.net/
+ * Term of use : http://geoiplookup.net/terms-of-use.php
+ * Licence fee : free
+ * Rate limit  : none
+ * Sample URL  : http://api.geoiplookup.net/?query=2a00:1210:fffe:200::1
  * Input type  : IP address (IPv4, IPv6)
- * Output type : json, xml, php, etc
+ * Output type : xml
  */
-class IP_Geo_Block_API_geoPlugin extends IP_Geo_Block_API {
+class IP_Geo_Block_API_GeoIPLookup extends IP_Geo_Block_API {
 	protected $template = array(
 		'type' => IP_GEO_BLOCK_API_TYPE_BOTH,
-		'url' => 'http://www.geoplugin.net/%API_FORMAT%.gp?ip=%API_IP%',
-		'api' => array(
-			'%API_FORMAT%' => 'json',
-		),
+		'url' => 'http://api.geoiplookup.net/?query=%API_IP%',
+		'api' => array(),
 		'transform' => array(
-			'countryCode' => 'geoplugin_countryCode',
-			'countryName' => 'geoplugin_countryName',
-			'regionName'  => 'geoplugin_region',
-			'cityName'    => 'geoplugin_city',
-			'latitude'    => 'geoplugin_latitude',
-			'longitude'   => 'geoplugin_longitude',
+			'countryCode' => 'countrycode',
+			'countryName' => 'countryname',
+			'regionName'  => 'countryname',
+			'cityName'    => 'city',
+			'latitude'    => 'latitude',
+			'longitude'   => 'longitude',
 		)
 	);
 }
@@ -485,74 +446,54 @@ class IP_Geo_Block_API_IPInfoDB extends IP_Geo_Block_API {
 /**
  * Class for Cache
  *
- * URL         : http://codex.wordpress.org/Transients_API
  * Input type  : IP address (IPv4, IPv6)
  * Output type : array
  */
 class IP_Geo_Block_API_Cache extends IP_Geo_Block_API {
 
+	// memory cache
+	protected static $memcache = array();
+
 	public static function update_cache( $hook, $validate, $settings ) {
-		$time = $_SERVER['REQUEST_TIME']; // time();
-		$num = ! empty( $settings['cache_hold'] ) ? $settings['cache_hold'] : 10;
-		$exp = ! empty( $settings['cache_time'] ) ? $settings['cache_time'] : HOUR_IN_SECONDS;
+		$cache = self::get_cache( $ip = $validate['ip'] );
 
-		// unset expired elements
-		if ( FALSE !== ( $cache = get_transient( IP_Geo_Block::CACHE_KEY ) ) ) {
-			foreach ( $cache as $key => $val ) {
-				if ( $time - $val['time'] > $exp )
-					unset( $cache[ $key ] );
-			}
-		}
-
-		// $validate['fail'] is set in auth_fail()
-		if ( isset( $cache[ $ip = $validate['ip'] ] ) ) {
-			$fail = $cache[ $ip ]['fail'] + (int)isset( $validate['fail'] );
-			$call = $cache[ $ip ]['call'] + (int)empty( $validate['fail'] );
+		if ( $cache ) {
+			$fail = $cache['fail'] + ( empty( $validate['fail'] ) ? 0 : 1 );
+			$call = $cache['call'] + ( empty( $validate['fail'] ) ? 1 : 0 );
 		} else { // if new cache then reset these values
-			$call = 1;
 			$fail = 0;
+			$call = 1;
 		}
 
 		// update elements
-		$cache[ $ip ] = array(
-			'time' => $time,
+		IP_Geo_Block_Logs::update_cache( $cache = array(
+			'time' => $_SERVER['REQUEST_TIME'],
+			'ip'   => $ip,
 			'hook' => $hook,
 			'code' => $validate['code'],
 			'auth' => $validate['auth'], // get_current_user_id() > 0
-			'fail' => $validate['auth'] ? 0 : $fail,
+			'fail' => $fail, // $validate['auth'] ? 0 : $fail,
 			'call' => $settings['save_statistics'] ? $call : 0,
 			'host' => isset( $validate['host'] ) ? $validate['host'] : NULL,
-		);
+		) );
 
-		// sort by 'time'
-		foreach ( $cache as $key => $val )
-			$hash[ $key ] = $val['time'];
-		array_multisort( $hash, SORT_DESC, $cache );
-
-		// keep the maximum number of entries, except for hidden elements
-		$time = 0;
-		foreach ( $cache as $key => $val ) {
-			if ( ! $val['auth'] && ++$time > $num ) {
-				--$time;
-				unset( $cache[ $key ] );
-			}
-		}
-
-		set_transient( IP_Geo_Block::CACHE_KEY, $cache, $exp ); // @since 2.8
-		return $cache[ $ip ];
+		return self::$memcache[ $ip ] = $cache;
 	}
 
 	public static function clear_cache() {
-		delete_transient( IP_Geo_Block::CACHE_KEY ); // @since 2.8
+		IP_Geo_Block_Logs::clear_cache();
+		self::$memcache = array();
 	}
 
 	public static function get_cache_all() {
-		return get_transient( IP_Geo_Block::CACHE_KEY );
+		return IP_Geo_Block_Logs::restore_cache();
 	}
 
 	public static function get_cache( $ip ) {
-		$cache = get_transient( IP_Geo_Block::CACHE_KEY );
-		return $cache && isset( $cache[ $ip ] ) ? $cache[ $ip ] : NULL;
+		if ( ! empty( self::$memcache[ $ip ] ) )
+			return self::$memcache[ $ip ];
+		else
+			return self::$memcache[ $ip ] = IP_Geo_Block_Logs::search_cache( $ip );
 	}
 
 	public function get_location( $ip, $args = array() ) {
@@ -578,49 +519,43 @@ class IP_Geo_Block_Provider {
 		'freegeoip.net' => array(
 			'key'  => NULL,
 			'type' => 'IPv4, IPv6 / free',
-			'link' => '<a class="ip-geo-block-link" href="http://freegeoip.net/" title="freegeoip.net: FREE IP Geolocation Web Service" rel=noreferrer target=_blank>http://freegeoip.net/</a>&nbsp;(IPv4, IPv6 / free)',
+			'link' => '<a rel="noreferrer" href="http://freegeoip.net/" title="freegeoip.net: FREE IP Geolocation Web Service">http://freegeoip.net/</a>&nbsp;(IPv4, IPv6 / free)',
 		),
 
 		'ipinfo.io' => array(
 			'key'  => NULL,
 			'type' => 'IPv4, IPv6 / free',
-			'link' => '<a class="ip-geo-block-link" href="http://ipinfo.io/" title="ip address information including geolocation, hostname and network details" rel=noreferrer target=_blank>http://ipinfo.io/</a>&nbsp;(IPv4, IPv6 / free)',
-		),
-
-		'IP-Json' => array(
-			'key'  => NULL,
-			'type' => 'IPv4, IPv6 / free',
-			'link' => '<a class="ip-geo-block-link" href="http://ip-json.rhcloud.com/" title="Free IP Geolocation Web Service" rel=noreferrer target=_blank>http://ip-json.rhcloud.com/</a>&nbsp;(IPv4, IPv6 / free)',
+			'link' => '<a rel="noreferrer" href="http://ipinfo.io/" title="ip address information including geolocation, hostname and network details">http://ipinfo.io/</a>&nbsp;(IPv4, IPv6 / free)',
 		),
 
 		'Nekudo' => array(
 			'key'  => NULL,
 			'type' => 'IPv4, IPv6 / free',
-			'link' => '<a class="ip-geo-block-link" href="http://geoip.nekudo.com/" title="geoip.nekudo.com | Free IP to geolocation API" rel=noreferrer target=_blank>http://geoip.nekudo.com/</a>&nbsp;(IPv4, IPv6 / free)',
+			'link' => '<a rel="noreferrer" href="http://geoip.nekudo.com/" title="geoip.nekudo.com | Free IP to geolocation API">http://geoip.nekudo.com/</a>&nbsp;(IPv4, IPv6 / free)',
 		),
 
 		'Xhanch' => array(
 			'key'  => NULL,
 			'type' => 'IPv4 / free',
-			'link' => '<a class="ip-geo-block-link" href="http://xhanch.com/xhanch-api-ip-get-detail/" title="Xhanch API &#8211; IP Get Detail | Xhanch Studio" rel=noreferrer target=_blank>http://xhanch.com/</a>&nbsp;(IPv4 / free)',
+			'link' => '<a rel="noreferrer" href="http://xhanch.com/xhanch-api-ip-get-detail/" title="Xhanch API &#8211; IP Get Detail | Xhanch Studio">http://xhanch.com/</a>&nbsp;(IPv4 / free)',
 		),
 
-		'geoPlugin' => array(
+		'GeoIPLookup' => array(
 			'key'  => NULL,
-			'type' => 'IPv4, IPv6 / free, need an attribution link',
-			'link' => '<a class="ip-geo-block-link" href="http://www.geoplugin.com/geolocation/" title="geoPlugin to geolocate your visitors" target="_new">IP Geolocation</a> by <a href="http://www.geoplugin.com/" title="plugin to geo-targeting and unleash your site\' potential." rel=noreferrer target=_blank>geoPlugin</a>&nbsp;(IPv4, IPv6 / free, need an attribution link)',
+			'type' => 'IPv4, IPv6 / free',
+			'link' => '<a rel="noreferrer" href="http://geoiplookup.net/" title="What Is My IP Address | GeoIP Lookup">GeoIPLookup.net</a>&nbsp;(IPv4, IPv6 / free)',
 		),
 
 		'ip-api.com' => array(
 			'key'  => FALSE,
 			'type' => 'IPv4, IPv6 / free for non-commercial use',
-			'link' => '<a class="ip-geo-block-link" href="http://ip-api.com/" title="IP-API.com - Free Geolocation API" rel=noreferrer target=_blank>http://ip-api.com/</a>&nbsp;(IPv4, IPv6 / free for non-commercial use)',
+			'link' => '<a rel="noreferrer" href="http://ip-api.com/" title="IP-API.com - Free Geolocation API">http://ip-api.com/</a>&nbsp;(IPv4, IPv6 / free for non-commercial use)',
 		),
 
 		'IPInfoDB' => array(
 			'key'  => '',
 			'type' => 'IPv4, IPv6 / free for registered user',
-			'link' => '<a class="ip-geo-block-link" href="http://ipinfodb.com/" title="IPInfoDB | Free IP Address Geolocation Tools" rel=noreferrer target=_blank>http://ipinfodb.com/</a>&nbsp;(IPv4, IPv6 / free for registered user)',
+			'link' => '<a rel="noreferrer" href="http://ipinfodb.com/" title="IPInfoDB | Free IP Address Geolocation Tools">http://ipinfodb.com/</a>&nbsp;(IPv4, IPv6 / free for registered user)',
 		),
 	);
 
@@ -682,9 +617,8 @@ class IP_Geo_Block_Provider {
 	 */
 	public static function get_valid_providers( $settings, $rand = TRUE, $cache = TRUE ) {
 		$list = array();
-		$geo = self::get_providers( 'key', $rand, $cache );
 
-		foreach ( $geo as $provider => $key ) {
+		foreach ( self::get_providers( 'key', $rand, $cache ) as $provider => $key ) {
 			if ( ! empty( $settings[ $provider ] ) || (
 			     ! isset( $settings[ $provider ] ) && NULL === $key ) ) {
 				$list[] = $provider;
@@ -700,7 +634,7 @@ class IP_Geo_Block_Provider {
 	 */
 	public static function diag_providers( $settings = NULL ) {
 		if ( ! $settings ) {
-			$settings = IP_Geo_Block::get_option( 'settings' );
+			$settings = IP_Geo_Block::get_option();
 			$settings = $settings['providers'];
 		}
 
@@ -714,10 +648,7 @@ class IP_Geo_Block_Provider {
 		}
 
 		if ( 0 === $field )
-			return __(
-				'You need to select at least one IP geolocation service. Otherwise <strong>you\'ll be blocked</strong> after the cache expires.',
-				'ip-geo-block'
-			);
+			return __( 'You need to select at least one IP geolocation service. Otherwise <strong>you\'ll be blocked</strong> after the cache expires.', 'ip-geo-block' );
 
 		return NULL;
 	}
@@ -731,12 +662,9 @@ class IP_Geo_Block_Provider {
 if ( class_exists( 'IP_Geo_Block' ) ) {
 
 	// Get absolute path to the geo-location API
-	$dir = IP_Geo_Block::get_option( 'settings' );
-	$dir = trailingslashit(
-		apply_filters(
-			IP_Geo_Block::PLUGIN_SLUG . '-api-dir',
-			dirname( $dir['api_dir'] )
-		)
+	$dir = IP_Geo_Block::get_option();
+	$dir = IP_Geo_Block_Util::slashit(
+		apply_filters( IP_Geo_Block::PLUGIN_NAME . '-api-dir', dirname( $dir['api_dir'] ) )
 	) . IP_Geo_Block::GEOAPI_NAME;
 
 	// If not exists then use bundled API
@@ -744,15 +672,15 @@ if ( class_exists( 'IP_Geo_Block' ) ) {
 		$dir = IP_GEO_BLOCK_PATH . IP_Geo_Block::GEOAPI_NAME;
 
 	// Scan API directory
-	$dir = trailingslashit( $dir );
+	$dir = IP_Geo_Block_Util::slashit( $dir );
 	$plugins = is_dir( $dir ) ? scandir( $dir, 1 ) : FALSE; // SCANDIR_SORT_DESCENDING @since 5.4.0
 
 	// Load addons by heigher priority order
 	if ( FALSE !== $plugins ) {
-		$exclude = array( '.', '..', 'index.php' );
+		$exclude = array( '.', '..' );
 		foreach ( $plugins as $plugin ) {
 			if ( ! in_array( $plugin, $exclude, TRUE ) && is_dir( $dir.$plugin ) ) {
-				@include_once( $dir.$plugin.'/class-'.$plugin.'.php' );
+				@include $dir.$plugin.'/class-'.$plugin.'.php';
 			}
 		}
 	}

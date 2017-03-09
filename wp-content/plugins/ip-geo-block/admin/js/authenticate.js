@@ -6,6 +6,7 @@
  */
 // utility object
 var IP_GEO_BLOCK_ZEP = {
+	init: false,
 	auth: 'ip-geo-block-auth-nonce',
 	nonce: IP_GEO_BLOCK_AUTH.nonce || '',
 	redirect: function (url) {
@@ -37,7 +38,8 @@ var IP_GEO_BLOCK_ZEP = {
 
 	// Parse a URL and return its components
 	function parse_uri(uri) {
-		uri = decodeURIComponent(uri ? uri.toString() : '');
+		// avoid malformed URI error when uri includes '%'
+		uri = /*decodeURIComponent*/(uri ? uri.toString() : '');
 
 		var m = uri.match(
 			// https://tools.ietf.org/html/rfc3986#appendix-B
@@ -55,6 +57,7 @@ var IP_GEO_BLOCK_ZEP = {
 		};
 	}
 
+	// Compose a URL from components
 	function compose_uri(uri) {
 		return (uri.scheme   ? uri.scheme + ':'   : '') +
 		       (uri.relative + uri.path)  +
@@ -119,14 +122,14 @@ var IP_GEO_BLOCK_ZEP = {
 		// returns the absloute path as a string
 		return real.join('/').replace(/\/\//g, '/');
 	}
-
+/*
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
 	function encodeURIComponentRFC3986(str) {
 		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
 			return '%' + c.charCodeAt(0).toString(16);
 		});
 	}
-
+*/
 	// append the nonce as query strings to the uri
 	function add_query_nonce(uri, nonce) {
 		if (typeof uri !== 'object') { // `string` or `undefined`
@@ -144,7 +147,7 @@ var IP_GEO_BLOCK_ZEP = {
 			}
 		}
 
-		data.push(IP_GEO_BLOCK_ZEP.auth + '=' + encodeURIComponentRFC3986(nonce));
+		data.push(IP_GEO_BLOCK_ZEP.auth + '=' + encodeURIComponent(nonce));//RFC3986
 		uri.query = data.join('&');
 
 		return compose_uri(uri);
@@ -182,14 +185,11 @@ var IP_GEO_BLOCK_ZEP = {
 		return 0; // internal not admin
 	}
 
-	// list of excluded links
-	var ajax_links = {};
-
 	// `theme-install.php` eats the query and set it to `request[browse]` as a parameter
-	ajax_links[IP_GEO_BLOCK_AUTH.home + IP_GEO_BLOCK_AUTH.admin + 'theme-install.php'] = function (data) {
+	var theme_featured = function (data) {
 		var i = data.length;
 		while (i-- > 0) {
-			if (data[i].indexOf('request%5Bbrowse%5D=ip-geo-block-auth') === 0) {
+			if (data[i].indexOf('request%5Bbrowse%5D=ip-geo-block-auth') !== -1) {
 				data[i] = 'request%5Bbrowse%5D=featured'; // correct the parameter
 				break;
 			}
@@ -197,8 +197,28 @@ var IP_GEO_BLOCK_ZEP = {
 		return data;
 	};
 
+	// `upload.php` eats the query and set it to `query[ip-geo-block-auth-nonce]` as a parameter
+	var media_library = function (data) {
+		var i = data.length;
+		while (i-- > 0) {
+			if (data[i].indexOf('query%5Bip-geo-block-auth-nonce%5D=') !== -1) {
+				delete data[i];
+				break;
+			}
+		}
+		return data;
+	};
+
+	// list of excluded links
+	var ajax_links = {
+		'upload.php': media_library,
+		'theme-install.php': theme_featured,
+		'network/theme-install.php': theme_featured
+	};
+
 	// check excluded path
 	function check_ajax(path) {
+		path = path.replace(IP_GEO_BLOCK_AUTH.home + IP_GEO_BLOCK_AUTH.admin, '');
 		return ajax_links.hasOwnProperty(path) ? ajax_links[path] : null;
 	}
 
@@ -228,7 +248,7 @@ var IP_GEO_BLOCK_ZEP = {
 					if (callback) {
 						data = callback(data);
 					}
-					data.push(IP_GEO_BLOCK_ZEP.auth + '=' + encodeURIComponentRFC3986(nonce));
+					data.push(IP_GEO_BLOCK_ZEP.auth + '=' + encodeURIComponent(nonce));//RFC3986
 					settings.data = data.join('&');
 				}
 			}
@@ -245,17 +265,17 @@ var IP_GEO_BLOCK_ZEP = {
 	 * Date: Thu Feb  6 10:13:59 ICT 2014
 	 */
 	function moveHandlerToTop($el, eventName, isDelegated) {
-		var data = $._data($el[0]).events;
-		var events = data[eventName];
+		var data = $._data($el[0]).events,
+		    events = data[eventName],
+		    handler = isDelegated ? events.splice(events.delegateCount - 1, 1)[0] : events.pop();
 
-		var handler = isDelegated ? events.splice(events.delegateCount - 1, 1)[0] : events.pop();
 		events.splice(isDelegated ? 0 : (events.delegateCount || 0), 0, handler);
 	}
 
 	function moveEventHandlers($elems, eventsString, isDelegate) {
 		var events = eventsString.split(/\s+/);
 		$elems.each(function(i) {
-			for (i = 0; i < events.length; ++i) {
+			for (i = 0; i < events.length; i++) {
 				var pureEventName = $.trim(events[i]).match(/[^\.]+/i)[0];
 				moveHandlerToTop($(this), pureEventName, isDelegate);
 			}
@@ -264,8 +284,8 @@ var IP_GEO_BLOCK_ZEP = {
 
 	if (typeof $.fn.onFirst === 'undefined') {
 		$.fn.onFirst = function(types, selector) {
-			var type, $el = $(this);
-			var isDelegated = typeof selector === 'string';
+			var type, $el = $(this),
+			    isDelegated = typeof selector === 'string';
 
 			$.fn.on.apply($el, arguments);
 
@@ -284,7 +304,7 @@ var IP_GEO_BLOCK_ZEP = {
 		};
 	}
 
-	$(function () {
+	function attach_nonce() {
 		var nonce = IP_GEO_BLOCK_ZEP.nonce;
 		if (nonce) {
 			var $body = $('body');
@@ -298,11 +318,10 @@ var IP_GEO_BLOCK_ZEP = {
 				}
 			});
 
-			$body.onFirst('click', 'a', function (event) {
-				var $this = $(this);
-
+			$body.onFirst('click contextmenu', 'a', function (event) {
 				// attr() returns 'string' or 'undefined'
-				var href = $this.attr('href'),
+				var $this = $(this),
+				    href = $this.attr('href'),
 				    rel = $this.attr('rel'),
 				    admin = "undefined" !== typeof href ? is_admin(href) : 0;
 
@@ -322,6 +341,13 @@ var IP_GEO_BLOCK_ZEP = {
 						'<meta http-equiv="refresh" content="0; url=' + sanitize(this.href) + '" />'
 					);
 					w.document.close();
+
+					// stop event propagation
+					$this.removeAttr('target');
+					$this.off('click contextmenu');
+					event.preventDefault();
+					event.stopPropagation();
+					event.stopImmediatePropagation();
 					return false;
 				}
 			});
@@ -345,6 +371,26 @@ var IP_GEO_BLOCK_ZEP = {
 					}
 				}
 			}
+		}
+	}
+
+	$(function () {
+		// avoid conflict with "Open external links in a new window"
+		$('a').each(function () {
+			if(!this.hasAttribute('onClick')) {
+				this.setAttribute('onClick', 'javascript:void(0);');
+			}
+		});
+
+		// attach event to add nonce
+		attach_nonce();
+		IP_GEO_BLOCK_ZEP.init = true;
+	});
+
+	// fallback on error
+	$(window).on('error', function () {
+		if (!IP_GEO_BLOCK_ZEP.init) {
+			attach_nonce();
 		}
 	});
 }(jQuery, document));

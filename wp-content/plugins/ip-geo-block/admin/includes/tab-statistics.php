@@ -1,15 +1,11 @@
 <?php
-include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-logs.php' );
-include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-util.php' );
-include_once( IP_GEO_BLOCK_PATH . 'classes/class-ip-geo-block-apis.php' );
-
 class IP_Geo_Block_Admin_Tab {
 
 	public static function tab_setup( $context ) {
-		$plugin_slug = IP_Geo_Block::PLUGIN_SLUG;
-		$option_slug = $context->option_slug['statistics'];
-		$option_name = $context->option_name['statistics'];
-		$options = IP_Geo_Block::get_option( 'settings' );
+		$plugin_slug = IP_Geo_Block::PLUGIN_NAME;
+		$option_slug = IP_Geo_Block::PLUGIN_NAME;
+		$option_name = IP_Geo_Block::OPTION_NAME;
+		$options = IP_Geo_Block::get_option();
 		$statistics = IP_Geo_Block_Logs::restore_stat( TRUE );
 
 		register_setting(
@@ -77,7 +73,7 @@ if ( $options['save_statistics'] ) :
 		$html = '<div id="'.$plugin_slug.'-chart-daily"><table id="'.$plugin_slug.'-targets">';
 
 		$prev = 0;
-		$targets = array( 'comment', 'xmlrpc', 'login', 'admin' );
+		$targets = array( 'comment', 'xmlrpc', 'login', 'admin', 'public' );
 		foreach ( $statistics['daystats'] as $key => $val ) {
 			while( $prev && $key - $prev > DAY_IN_SECONDS ) {
 				$prev += DAY_IN_SECONDS;
@@ -122,7 +118,7 @@ if ( $options['save_statistics'] ) :
 				'type' => 'html',
 				'option' => $option_name,
 				'field' => $field,
-				'value' => '<table class="'.$option_slug.'-'.$field.'">' .
+				'value' => '<table class="'.$option_slug.'-statistics-table">' .
 					'<thead><tr><th>IPv4</th><th>IPv6</th></tr></thead><tbody><tr>' .
 					'<td>' . esc_html( $statistics['IPv4'] ) . '</td>' .
 					'<td>' . esc_html( $statistics['IPv6'] ) . '</td>' .
@@ -131,7 +127,7 @@ if ( $options['save_statistics'] ) :
 		);
 
 		$field = 'service';
-		$html  = '<table class="'.$option_slug.'-'.$field.'"><thead><tr>';
+		$html  = '<table class="'.$option_slug.'-statistics-table"><thead><tr>';
 		$html .= '<th>' . __( 'Name of API',     'ip-geo-block' ) . '</th>';
 		$html .= '<th>' . __( 'Calls',           'ip-geo-block' ) . '</th>';
 		$html .= '<th>' . __( 'Response [msec]', 'ip-geo-block' ) . '</th>';
@@ -217,34 +213,39 @@ endif;
 		);
 
 		$field = 'cache';
-		$html  = '<table class="'.$option_slug.'-'.$field.'"><thead><tr>';
+		$html  = '<table class="'.$option_slug.'-statistics-table"><thead><tr>';
 		$html .= '<th>' . __( 'IP address',            'ip-geo-block' ) . '</th>';
 		$html .= '<th>' . __( 'Country code / Access', 'ip-geo-block' ) . '</th>';
 		$html .= '<th>' . __( 'Elapsed [sec] / Calls', 'ip-geo-block' ) . '</th>';
 		$html .= '</tr></thead><tbody>';
 
 		if ( $cache = IP_Geo_Block_API_Cache::get_cache_all() ) {
+			$count = 0;
 			$time = time();
 			$debug = defined( 'IP_GEO_BLOCK_DEBUG' ) && IP_GEO_BLOCK_DEBUG;
 			foreach ( $cache as $key => $val ) {
 				if ( $options['anonymize'] )
 					$key = preg_replace( '/\d{1,3}$/', '***', $key );
-				if ( empty( $val['auth'] ) || $debug ) { // hide authenticated user
-					$html .= '<tr><td>' .  esc_html( $key         ) . '</td>';
-					$html .= '<td>'     .  esc_html( $val['code'] ) . ' / ';
-					$html .= '<small>'  .  esc_html( $val['hook'] ) . '</small></td>';
-					$html .= '<td>' . ( $time - (int)$val['time'] ) . ' / ';
-					$html .= $options['save_statistics'] ? (int)$val['call'] : '-';
-					if ( $debug ) {
-						$user = get_user_by( 'id', intval( $val['auth'] ) );
-						$html .= ' ' . esc_html( $user ? $user->get( 'user_login' ) : '' );
-						$html .= ' / fail:' . intval( $val['fail'] );
-					}
-					$html .= '</td></tr>';
+				$html .= '<tr><td>' .  esc_html( $key         ) . '</td>';
+				$html .= '<td>'     .  esc_html( $val['code'] ) . ' / ';
+				$html .= '<small>'  .  esc_html( $val['hook'] ) . '</small></td>';
+				$html .= '<td>' . ( $time - (int)$val['time'] ) . ' / ';
+				$html .= $options['save_statistics'] ? (int)$val['call'] : '-';
+				if ( $debug ) {
+					$user = get_user_by( 'id', intval( $val['auth'] ) );
+					$html .= ' ' . esc_html( $user ? $user->get( 'user_login' ) : '' );
+					$html .= ' / fail:' . intval( $val['fail'] );
 				}
+				$html .= '</td></tr>';
+				if ( ++$count >= $options['cache_hold'] )
+					break;
 			}
 		}
+
 		$html .= '</tbody></table>';
+
+		if ( ! empty( $count ) )
+			$html .= '<p style="text-align:right">[ ' . $count . ' / ' . count( $cache ) . ' ]</p>';
 
 		add_settings_field(
 			$option_name.'_'.$field,
