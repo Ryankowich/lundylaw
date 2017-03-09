@@ -1,8 +1,0 @@
-# BEGIN IP Geo Block
-<IfModule mod_rewrite.c>
-RewriteEngine on
-RewriteBase /lundylaw/wp-content/plugins/ip-geo-block/
-RewriteCond %{REQUEST_URI} !ip-geo-block/rewrite.php$
-RewriteRule ^.*\.php$ rewrite.php [L]
-</IfModule>
-# END IP Geo Block
