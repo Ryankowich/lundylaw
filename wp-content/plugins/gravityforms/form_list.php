@@ -272,7 +272,7 @@ class GFFormList {
 			jQuery( document ).ready( function( $ ) {
 
 				// load new form modal on New Form page
-				<?php if ( rgget( 'page' ) == 'gf_new_form' ) :	?>
+				<?php if ( rgget( 'page' ) == 'gf_new_form' && ! rgget( 'paged' ) ) :	?>
 				loadNewFormModal();
 				<?php endif; ?>
 
@@ -305,6 +305,13 @@ class GFFormList {
 				resetNewFormModal();
 				tb_show(<?php echo json_encode( esc_html__( 'Create a New Form', 'gravityforms' ) ); ?>, '#TB_inline?width=375&amp;inlineId=gf_new_form_modal');
 				jQuery('#new_form_title').focus();
+
+				jQuery( '#new_form_title').keyup( function( event ) {
+					if (event.keyCode == 13) {
+						saveNewForm();
+					}
+				});
+
 				return false;
 			}
 
@@ -395,7 +402,8 @@ class GF_Form_List_Table extends WP_List_Table {
 		$hidden                = array();
 		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable, 'title' );
-		$this->locking_info = new GFFormLocking();
+		$this->locking_info    = new GFFormLocking();
+		$this->filter          = rgget( 'filter' );
 	}
 
 	function get_sortable_columns() {
@@ -430,7 +438,7 @@ class GF_Form_List_Table extends WP_List_Table {
 
 	function prepare_items() {
 
-		$sort_column    = empty( $_GET['orderby'] ) ? 'title' : $_GET['orderby'];
+		$sort_column  = empty( $_GET['orderby'] ) ? 'title' : $_GET['orderby'];
 		$sort_columns = array_keys( $this->get_sortable_columns() );
 
 		if ( ! in_array( strtolower( $sort_column ), $sort_columns ) ) {
@@ -439,8 +447,9 @@ class GF_Form_List_Table extends WP_List_Table {
 
 		$sort_direction = empty( $_GET['order'] ) ? 'ASC' : strtoupper( $_GET['order'] );
 		$sort_direction = $sort_direction == 'ASC' ? 'ASC' : 'DESC';
-		$filter = rgget( 'filter' );
-		$trash = false;
+		$filter         = $this->filter;
+		$trash          = false;
+
 		switch ( $filter ) {
 			case '':
 				$active = null;
@@ -455,7 +464,8 @@ class GF_Form_List_Table extends WP_List_Table {
 				$active = null;
 				$trash = true;
 		}
-		$forms   = RGFormsModel::get_forms( $active, $sort_column, $sort_direction, $trash );
+
+		$forms = RGFormsModel::get_forms( $active, $sort_column, $sort_direction, $trash );
 
 		$per_page = $this->get_items_per_page( 'gform_forms_per_page', 20 );
 
