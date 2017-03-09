@@ -1,0 +1,9 @@
+@import 'legacy/style';
+
+@import 'partials/test';
+
+$primary-color: red;
+
+body {
+	background-color: $primary-color;
+}
