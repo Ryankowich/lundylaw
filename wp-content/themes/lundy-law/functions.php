@@ -26,12 +26,13 @@ function ll_enqueue_srcipts(){
 		wp_enqueue_style( 'colorbox-css', $dir . '/css/colorbox.css', array(), CRB_THEME_VERSION );
 		wp_enqueue_style( 'style', $dir . '/style.css', array(), CRB_THEME_VERSION );	
 		# enqueue custom scripts
-		wp_enqueue_script('jquery.colorbox', $dir . '/js/jquery.colorbox-min.js', array('jquery'),  CRB_THEME_VERSION, true );	
+		#wp_enqueue_script('jquery.colorbox', $dir . '/js/jquery.colorbox-min.js', array('jquery'),  CRB_THEME_VERSION, true );	
 		wp_enqueue_script('gmaps-api', '//maps.googleapis.com/maps/api/js?sensor=true', false,  CRB_THEME_VERSION, true );	
-		wp_enqueue_script('css3-mediaqueries-js', $dir . '/js/css3-mediaqueries.js', array('jquery'),  CRB_THEME_VERSION, true );
-		wp_enqueue_script('jquery.flexslider', $dir . '/js/jquery.flexslider-min.js', array('jquery'),  CRB_THEME_VERSION, true );
-		wp_enqueue_script('functions', $dir . '/js/functions.js', array('jquery'),  CRB_THEME_VERSION, true );
-		wp_enqueue_script('scripts', $dir . '/js/scripts.js', array('jquery'),  CRB_THEME_VERSION, true);
+		#wp_enqueue_script('css3-mediaqueries-js', $dir . '/js/css3-mediaqueries.js', array('jquery'),  CRB_THEME_VERSION, true );
+		#wp_enqueue_script('jquery.flexslider', $dir . '/js/jquery.flexslider-min.js', array('jquery'),  CRB_THEME_VERSION, true );
+		#wp_enqueue_script('functions', $dir . '/js/functions.js', array('jquery'),  CRB_THEME_VERSION, true );
+		#wp_enqueue_script('scripts', $dir . '/js/scripts.js', array('jquery'),  CRB_THEME_VERSION, true);
+		wp_enqueue_script('scripts', $dir . '/js/all.js', array('jquery'),  CRB_THEME_VERSION, true);
 		wp_enqueue_script('brightcove', '//admin.brightcove.com/js/BrightcoveExperiences.js', false, false, true);
 	} else {
 		wp_enqueue_style( 'style', $dir . '/lp_parts/style.css', array(), CRB_THEME_VERSION );
