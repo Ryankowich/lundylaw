@@ -129,7 +129,8 @@ get_header();
 			<!-- end of content -->
 
 			<?php if ( is_active_sidebar( 'home-sidebar' ) ) : ?>
-				<?php get_sidebar( 'home' ); ?>
+				<?php //get_sidebar( 'home' ); ?>
+				<?php get_template_part( 'partials/filtered_practice_areas' ); ?>
 			<!-- end of sidebar -->
 			<?php endif; ?>
 

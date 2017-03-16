@@ -29,8 +29,7 @@ gulp.task('scripts', function() {
 //livereload any php edits
 gulp.task('php', function() {
 	gulp.src('./*.php')
-		.pipe(notify("PHP files updated."))
-		.pipe(livereload());
+		.pipe(notify("PHP files updated, but not reloaded."));
 });
 
 gulp.task('watch', function () {
