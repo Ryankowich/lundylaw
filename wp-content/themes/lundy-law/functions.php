@@ -32,7 +32,7 @@ function ll_enqueue_srcipts(){
 		#wp_enqueue_script('jquery.flexslider', $dir . '/js/jquery.flexslider-min.js', array('jquery'),  CRB_THEME_VERSION, true );
 		#wp_enqueue_script('functions', $dir . '/js/functions.js', array('jquery'),  CRB_THEME_VERSION, true );
 		#wp_enqueue_script('scripts', $dir . '/js/scripts.js', array('jquery'),  CRB_THEME_VERSION, true);
-		wp_enqueue_script('scripts', $dir . '/js/all.js', array('jquery'),  CRB_THEME_VERSION, true);
+		wp_enqueue_script('all', $dir . '/js/all.js', array('jquery'),  CRB_THEME_VERSION, true);
 		wp_enqueue_script('brightcove', '//admin.brightcove.com/js/BrightcoveExperiences.js', false, false, true);
 	} else {
 		wp_enqueue_style( 'style', $dir . '/lp_parts/style.css', array(), CRB_THEME_VERSION );

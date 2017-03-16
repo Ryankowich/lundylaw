@@ -1,4 +1,15 @@
 /***************************************
+*          HOMEPAGE FILTER             *
+***************************************/
+
+jQuery(document).ready(function($) {
+	$('.grid').isotope({
+		itemSelector: '.element-item',
+		layoutMode: 'fitRows'
+	});
+});
+
+/***************************************
 *          HOMEPAGE SLIDESHOW          *
 ***************************************/
 

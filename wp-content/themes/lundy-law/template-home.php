@@ -129,13 +129,14 @@ get_header();
 			<!-- end of content -->
 
 			<?php if ( is_active_sidebar( 'home-sidebar' ) ) : ?>
-				<?php //get_sidebar( 'home' ); ?>
-				<?php get_template_part( 'partials/filtered_practice_areas' ); ?>
+				<?php get_sidebar( 'home' ); ?>
 			<!-- end of sidebar -->
 			<?php endif; ?>
 
 		</div>
 		<!-- end of main -->
+
+		<?php get_template_part( 'partials/filtered_practice_areas' ); ?>
 
 		<?php 
 		$sections = carbon_get_post_meta( get_the_ID(), 'content_sections', 'complex' );
