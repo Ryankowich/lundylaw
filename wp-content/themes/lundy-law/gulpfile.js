@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var livereload = require('gulp-livereload');
+var notify = require('gulp-notify');
 
 gulp.task('default', function() {
 
@@ -12,6 +13,7 @@ gulp.task('sass', function () {
 	return gulp.src('./development/styles/style.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(gulp.dest('./'))
+		.pipe(notify("Stylesheet updated."))
 		.pipe(livereload());
 });
 
@@ -20,12 +22,14 @@ gulp.task('scripts', function() {
 	return gulp.src('./development/scripts/*.js')
 		.pipe(concat('all.js'))
 		.pipe(gulp.dest('./js/'))
+		.pipe(notify("Scripts updated."))
 		.pipe(livereload());
 });
 
 //livereload any php edits
 gulp.task('php', function() {
 	gulp.src('./*.php')
+		.pipe(notify("PHP files updated."))
 		.pipe(livereload());
 });
 
