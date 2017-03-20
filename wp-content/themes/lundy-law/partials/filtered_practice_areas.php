@@ -1,10 +1,14 @@
 <!-- start filtered practice areas -->
 
-<!-- still needs to be hooked up to isotope -->
+<div id="filtered-practice-areas" class="sections">
 
-<div id="test">
+	<h2>Practice Areas</h2>
 
-	<h1>filtered practice areas</h1>
+    <div class="button-group filter-button-group">
+        <button data-filter="*">show all</button>
+        <button data-filter=".auto">auto</button>
+        <button data-filter=".not-auto">not auto</button>
+    </div>
 
 	<?php 
  
@@ -22,7 +26,14 @@
 
         $url = $menu_item->url;
 
-        $menu_list .= '<div class="element-item"><a href="' . $url . '">' . $img . $title . '</a></div>';
+        //check if the titles contain certain words, and add classes based on that
+        if (strpos($title, 'Auto') !== false) {
+            $class = 'auto';
+        } else {
+            $class = 'not-auto';
+        }
+
+        $menu_list .= '<div class="element-item ' . $class . '"><a href="' . $url . '">' . $img . '<span>' . $title . '</span>' . '</a></div>';
     }
 
     $menu_list .= '</div><br>';
@@ -31,8 +42,6 @@
 	echo $menu_list;
 
 	?>
-
-	<h1>end filtered practice areas</h1>
 
 </div>
 

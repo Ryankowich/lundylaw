@@ -4,8 +4,9 @@
 
 @import 'partials/test';
 
-$primary-color: #687678;
-
-body {
-	background-color: $primary-color;
+.element-item span {
+	display: block;
+	position: absolute;
+	top: 50%;
+	color: #fff;
 }
