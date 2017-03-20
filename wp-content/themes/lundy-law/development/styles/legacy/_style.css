@@ -107,22 +107,35 @@ h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal
 .header-top .slogan { float: left; display: inline; }
 .header-top .phone { float: right; display: inline; }
 
+/* LM */
+/*
 .header-bottom { font-family: 'Questrial', arial, helvetica, sans-serif; font-size: 14px; line-height: 69px; text-transform: uppercase; padding-bottom: 6px; background: url(images/shadow.png) no-repeat center bottom; }
+*/
 .header-bottom a.chat-btn { padding-left: 27px; background: url(images/chat-ico.png) no-repeat 0 center; float: right; display: inline; color: #767676; }
 .header-bottom a.chat-btn:hover { color: #123f99; text-decoration: none; }
 
+/* LM */
+/*
 #navigation { float: left; display: inline; }
+*/
 #navigation a.menu-btn {height: 69px; width: 83px; background: url(images/menu-btn.png) no-repeat 0 0; display: none; }
 #navigation ul { list-style: none; list-style-position: outside; }
 #navigation ul li a { display: block; position: relative; height: 100%; }
 #navigation ul li a:hover { text-decoration: none; }
 #navigation > ul > li { float: left; display: inline; position: relative; }
+
+/* LM */
+/*
 #navigation > ul > li + li { margin-left: 35px; }
 #navigation > ul > li > a { color: #767676; }
 #navigation > ul > li:hover > a,
 #navigation > ul > li.current-menu-item > a { color: #123f99; }
+*/
 #navigation > ul > li.menu-item-has-children > span.arr { display: none; }
+/* LM */
+/*
 #navigation > ul > li.menu-item-has-children > a:after { content: ''; border: 5px outset transparent; border-top-style: solid; border-bottom: none; border-top-color: #b5b5b5; position: absolute; bottom: 18px; left: 50%; margin-left: -5px; font-size: 0; line-height: 0; text-indent: -4000px; }
+*/
 #navigation > ul > li.menu-item-has-children:hover > a:after,
 #navigation > ul > li.menu-item-has-children.current-menu-item:hover > a:after { border-top-color: #4165ad; }
 #navigation ul ul { min-width: 190px; *width: 220px; background: url(images/dd-bg.png) repeat 0 0; position: absolute; top: 100%; left: 0; line-height: 30px; padding: 14px 0 20px 0; font-weight: normal; border-radius: 0 0 3px 3px; -moz-border-radius: 0 0 3px 3px; -webkit-border-radius: 0 0 3px 3px; -o-border-radius: 0 0 3px 3px; display: none; }

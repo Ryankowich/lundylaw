@@ -1,3 +1,7 @@
+/************************Notes:
+
+removed hablamos espanol menu items (database)
+\************************/
 @font-face {
   font-family: 'TradeGothicLTStdBdCn20';
   src: url("fonts/tradegothicltstdbdcn20-webfont.eot");
@@ -350,14 +354,10 @@ h5 {
   float: right;
   display: inline; }
 
-.header-bottom {
-  font-family: 'Questrial', arial, helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 69px;
-  text-transform: uppercase;
-  padding-bottom: 6px;
-  background: url(images/shadow.png) no-repeat center bottom; }
-
+/* LM */
+/*
+.header-bottom { font-family: 'Questrial', arial, helvetica, sans-serif; font-size: 14px; line-height: 69px; text-transform: uppercase; padding-bottom: 6px; background: url(images/shadow.png) no-repeat center bottom; }
+*/
 .header-bottom a.chat-btn {
   padding-left: 27px;
   background: url(images/chat-ico.png) no-repeat 0 center;
@@ -369,10 +369,10 @@ h5 {
   color: #123f99;
   text-decoration: none; }
 
-#navigation {
-  float: left;
-  display: inline; }
-
+/* LM */
+/*
+#navigation { float: left; display: inline; }
+*/
 #navigation a.menu-btn {
   height: 69px;
   width: 83px;
@@ -396,33 +396,20 @@ h5 {
   display: inline;
   position: relative; }
 
-#navigation > ul > li + li {
-  margin-left: 35px; }
-
-#navigation > ul > li > a {
-  color: #767676; }
-
+/* LM */
+/*
+#navigation > ul > li + li { margin-left: 35px; }
+#navigation > ul > li > a { color: #767676; }
 #navigation > ul > li:hover > a,
-#navigation > ul > li.current-menu-item > a {
-  color: #123f99; }
-
+#navigation > ul > li.current-menu-item > a { color: #123f99; }
+*/
 #navigation > ul > li.menu-item-has-children > span.arr {
   display: none; }
 
-#navigation > ul > li.menu-item-has-children > a:after {
-  content: '';
-  border: 5px outset transparent;
-  border-top-style: solid;
-  border-bottom: none;
-  border-top-color: #b5b5b5;
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  margin-left: -5px;
-  font-size: 0;
-  line-height: 0;
-  text-indent: -4000px; }
-
+/* LM */
+/*
+#navigation > ul > li.menu-item-has-children > a:after { content: ''; border: 5px outset transparent; border-top-style: solid; border-bottom: none; border-top-color: #b5b5b5; position: absolute; bottom: 18px; left: 50%; margin-left: -5px; font-size: 0; line-height: 0; text-indent: -4000px; }
+*/
 #navigation > ul > li.menu-item-has-children:hover > a:after,
 #navigation > ul > li.menu-item-has-children.current-menu-item:hover > a:after {
   border-top-color: #4165ad; }
@@ -2265,26 +2252,74 @@ div.videoplayer.inset-right {
 ul {
   color: red; }
 
+/*
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+*/
+span,
+a {
+  font-family: "Lato", sans-serif;
+  font-weight: 300; }
+
+button {
+  background-color: #FFBF2E;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  padding: 7px 13px;
+  text-transform: uppercase;
+  cursor: pointer; }
+
 #header {
   position: fixed;
   z-index: 100;
   top: 0 !important;
   left: 0;
   right: 0; }
+  #header .logo {
+    width: 200px;
+    display: inline-block; }
+
+.header-bottom {
+  font-family: "Questrial", arial, helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 60px;
+  background: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); }
 
 body > .shell {
   margin-top: 100px; }
+
+#navigation {
+  float: right;
+  display: inline; }
+  #navigation > ul > li + li {
+    margin-left: 20px; }
+  #navigation > ul > li > a {
+    color: #767676; }
+  #navigation > ul > li:hover > a,
+  #navigation > ul > li.current-menu-item > a {
+    color: #005B90; }
 
 .banner-home {
   top: 100px; }
 
 .pre-nav {
-  background: #050505 url(images/header-top.jpg) repeat-y center 0; }
-  .pre-nav .phone, .pre-nav .slogan {
-    width: 200px;
-    display: inline-block; }
-  .pre-nav button {
-    float: right; }
+  background: #005B90;
+  line-height: 40px; }
+  .pre-nav span {
+    margin-left: 20px; }
+  .pre-nav span, .pre-nav a {
+    color: #fff;
+    font-size: 14px; }
+  .pre-nav .shell {
+    text-align: right; }
 
 .element-item span {
   display: block;

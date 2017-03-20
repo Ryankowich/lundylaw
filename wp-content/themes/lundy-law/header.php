@@ -32,6 +32,7 @@
 	<?php wp_head(); ?>
 
 <script src='https://www.google.com/recaptcha/api.js'></script> 
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
 </head>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -78,21 +79,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		if ( $slogan || $header_image ) : ?>
 		<div class="pre-nav">
 			<div class="shell clearfix">
-				<?php if ( $header_image ) : ?>
-				<div class="phone">
-					<a href="/">
-						<?php echo wp_get_attachment_image( $header_image, 'header-image' ); ?>
-					</a>
-				</div>
-				<?php endif; 
-				if ( $slogan ) : ?>
-				<div class="slogan">
-					<a href="/">
-						<?php echo wp_get_attachment_image( $slogan, 'slogan' ); ?>
-					</a>
-				</div>
-				<?php endif; ?>
-				<button>Consultation Form</button>
+				<span><?php echo do_shortcode('[gtranslate]'); ?></span>
+				<span><a href="javascript:StartNgageChat();">Live Chat</a></span>
+				<span class="phone">215-567-3000</span>
+				<span><button>GET HELP NOW</button></span>
 			</div>
 		</div>
 		<!-- end of header-top -->
@@ -100,6 +90,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 		<div class="header-bottom">
 			<div class="shell clearfix">
+				<?php if ( $header_image ) : ?>
+				<div class="logo">
+					<a href="/">
+						<?php echo wp_get_attachment_image( $header_image, 'header-image' ); ?>
+					</a>
+				</div>
+				<?php endif; ?>
 				<div id="navigation">
 					<a href="#" class="menu-btn"></a>
 					<?php
