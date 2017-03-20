@@ -2284,7 +2284,10 @@ button {
   right: 0; }
   #header .logo {
     width: 200px;
-    display: inline-block; }
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    line-height: 0; }
 
 .header-bottom {
   font-family: "Questrial", arial, helvetica, sans-serif;
@@ -2305,13 +2308,13 @@ body > .shell {
     color: #767676; }
   #navigation > ul > li:hover > a,
   #navigation > ul > li.current-menu-item > a {
-    color: #005B90; }
+    color: #265B8D; }
 
 .banner-home {
   top: 100px; }
 
 .pre-nav {
-  background: #005B90;
+  background: #265B8D;
   line-height: 40px; }
   .pre-nav span {
     margin-left: 20px; }
@@ -2332,7 +2335,8 @@ body > .shell {
 
 .liveChatFloatingButtonTop {
   bottom: 0 !important;
-  top: auto !important; }
+  top: auto !important;
+  display: none; }
 
 .liveChatFloatingButtonSpacer {
   display: none; }

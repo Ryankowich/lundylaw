@@ -20,7 +20,8 @@ $light: 300;
 $reg: 400;
 $bold: 700;
 
-$blue: #005B90;
+//$blue: #005B90;
+$blue: #265B8D;
 $yellow: #FFBF2E;
 $gray: #767676;
 
@@ -62,6 +63,9 @@ button {
 	.logo {
 		width: 200px;
 		display: inline-block;
+		position: absolute;
+		top: 50%;
+		line-height: 0;
 	}
 }
 
@@ -134,6 +138,7 @@ body > .shell {
 .liveChatFloatingButtonTop {
 	bottom: 0 !important;
 	top: auto !important;
+	display: none;
 }
 
 .liveChatFloatingButtonSpacer {

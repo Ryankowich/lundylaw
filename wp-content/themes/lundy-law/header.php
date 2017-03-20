@@ -90,13 +90,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 		<div class="header-bottom">
 			<div class="shell clearfix">
-				<?php if ( $header_image ) : ?>
 				<div class="logo">
 					<a href="/">
-						<?php echo wp_get_attachment_image( $header_image, 'header-image' ); ?>
+						<img src="http://localhost:8888/lundylaw/wp-content/uploads/TopBanner.jpg">
 					</a>
 				</div>
-				<?php endif; ?>
 				<div id="navigation">
 					<a href="#" class="menu-btn"></a>
 					<?php
