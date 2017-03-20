@@ -85,8 +85,6 @@
 								</div>
 								<!-- end of socials -->
 								<?php endif; ?>
-
-								
 							</div>
 						<?php endif; ?>
 
@@ -113,7 +111,6 @@
 						echo wpautop( $copy );
 					} ?>					
 				</div>
-				<?php echo do_shortcode('[gtranslate]'); ?>
 			</div>
 			<!-- end of footer-bottom -->
 		</div>

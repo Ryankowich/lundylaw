@@ -28,13 +28,14 @@ gulp.task('scripts', function() {
 
 //livereload any php edits
 gulp.task('php', function() {
-	gulp.src('./*.php')
-		.pipe(notify("PHP files updated, but not reloaded."));
+	gulp.src('./header.php')
+		.pipe(notify("Header PHP files updated."))
+		.pipe(livereload());
 });
 
 gulp.task('watch', function () {
 	livereload.listen();
 	gulp.watch('./development/styles/*.scss', ['sass'] );
 	gulp.watch('./development/scripts/*.js', ['scripts']);
-	//gulp.watch('./*.php', ['php']);
+	gulp.watch('./header.php', ['php']);
 });
