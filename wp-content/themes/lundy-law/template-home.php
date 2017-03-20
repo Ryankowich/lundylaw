@@ -136,6 +136,8 @@ get_header();
 		</div>
 		<!-- end of main -->
 
+		<?php get_template_part( 'partials/filtered_practice_areas' ); ?>
+
 		<?php 
 		$sections = carbon_get_post_meta( get_the_ID(), 'content_sections', 'complex' );
 

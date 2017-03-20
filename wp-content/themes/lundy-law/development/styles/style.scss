@@ -1,11 +1,146 @@
 //@import 'framework/skeleton';
 
+/************************\
+Notes:
+
+removed hablamos espanol menu items (database)
+\************************/
+
+@import 'partials/legacyfonts';
+
 @import 'legacy/style';
 
 @import 'partials/test';
 
-$primary-color: #687678;
+$font-stack: 'Questrial', arial, helvetica, sans-serif;
+$lato: 'Lato', sans-serif;
 
-body {
-	background-color: $primary-color;
+//dont forget to remove unused 
+$light: 300;
+$reg: 400;
+$bold: 700;
+
+//$blue: #005B90;
+$blue: #265B8D;
+$yellow: #FFBF2E;
+$gray: #767676;
+
+/*
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+*/
+
+span, 
+a {
+	font-family: $lato; 
+	font-weight: $light;
+}
+
+button {
+	background-color: $yellow;
+	font-family: $lato; 
+	font-weight: $reg;
+	color: #fff;
+	border: 0;
+	border-radius: 3px;
+	padding: 7px 13px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+//header & nav section
+#header {
+	position: fixed;
+	z-index: 100;
+	top: 0 !important;
+	left: 0;
+	right: 0;
+
+	.logo {
+		width: 200px;
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		line-height: 0;
+	}
+}
+
+.header-bottom { 
+	font-family: $font-stack; 
+	font-size: 14px; 
+	line-height: 60px; 
+	//background: url(images/shadow.png) no-repeat center bottom; 
+	background: #fff;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+body > .shell {
+	margin-top: 100px;
+}
+
+#navigation { 
+	float: right; 
+	display: inline; 
+
+	> ul > li + li {
+		margin-left: 20px;
+	}
+
+	> ul > li > a { 
+		color: $gray; 
+	}
+
+	> ul > li:hover > a, 
+	> ul > li.current-menu-item > a {
+		color: $blue;
+	}
+}
+
+.banner-home {
+	top: 100px;
+}
+
+.pre-nav {
+	background: $blue;
+	line-height: 40px;
+
+	span {
+		margin-left: 20px;
+	}
+
+	span, a {
+		color: #fff;
+		font-size: 14px;
+	}
+
+	.shell {
+		text-align: right;
+	}
+
+}
+
+.element-item span {
+	display: block;
+	position: absolute;
+	top: 50%;
+	color: #fff;
+}
+
+#footer {
+	margin-bottom: 24px;
+}
+
+//3rd party style overwrites
+.liveChatFloatingButtonTop {
+	bottom: 0 !important;
+	top: auto !important;
+	display: none;
+}
+
+.liveChatFloatingButtonSpacer {
+	display: none;
 }

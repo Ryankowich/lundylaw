@@ -11,7 +11,8 @@
 		}
 	?>
 	</ul>
-
+	<!-- begin TESTTEST -->
 	<?php echo do_shortcode('[nav]'); ?>
+	<!-- end TESTTEST -->
 </div>
 <!-- end of sidebar -->
