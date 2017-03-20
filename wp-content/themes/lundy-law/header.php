@@ -76,18 +76,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		$header_image = carbon_get_theme_option( 'header_image' );
 		
 		if ( $slogan || $header_image ) : ?>
-		<div class="header-top">
+		<div class="pre-nav">
 			<div class="shell clearfix">
-				<?php if ( $slogan ) : ?>
-				<div class="slogan">
-					<?php echo wp_get_attachment_image( $slogan, 'slogan' ); ?>
+				<?php if ( $header_image ) : ?>
+				<div class="phone">
+					<a href="/">
+						<?php echo wp_get_attachment_image( $header_image, 'header-image' ); ?>
+					</a>
 				</div>
 				<?php endif; 
-				if ( $header_image ) : ?>
-				<div class="phone">
-					<?php echo wp_get_attachment_image( $header_image, 'header-image' ); ?>
+				if ( $slogan ) : ?>
+				<div class="slogan">
+					<a href="/">
+						<?php echo wp_get_attachment_image( $slogan, 'slogan' ); ?>
+					</a>
 				</div>
 				<?php endif; ?>
+				<button>Consultation Form</button>
 			</div>
 		</div>
 		<!-- end of header-top -->
