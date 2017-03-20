@@ -2292,6 +2292,9 @@ body > .shell {
   top: 50%;
   color: #fff; }
 
+#footer {
+  margin-bottom: 24px; }
+
 .liveChatFloatingButtonTop {
   bottom: 0 !important;
   top: auto !important; }

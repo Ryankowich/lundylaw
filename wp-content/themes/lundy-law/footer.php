@@ -86,30 +86,7 @@
 								<!-- end of socials -->
 								<?php endif; ?>
 
-								<?php if ( !empty( $additional_links ) ) : ?>
-								<div class="app-newsletter">
-									<ul class="clearfix">
-										<?php foreach ( $additional_links as $l ) : ?>
-										<li>
-											<a href="https://www.lundylaw.com/blog/uncategorized/subscribe-to-newsletter/" target="_blank">
-												<?php 
-												if ( $l['icon'] ) {
-													echo wp_get_attachment_image( $l['icon'], 'link-icon' );
-													echo '<br />';
-												}
-
-												if ( $l['link_text'] ) {
-													echo $l['link_text'];	
-												}
-												?>
-											</a>
-										</li>
-										<?php endforeach; ?>
-									</ul>
-								</div>
-								<!-- end of app-newsletter -->
-								<?php endif; ?>
-
+								
 							</div>
 						<?php endif; ?>
 
