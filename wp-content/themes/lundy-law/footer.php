@@ -6,87 +6,31 @@
 			<div class="footer-top">
 				<div class="shell">
 					<div class="footer-cols clearfix">
-						<div class="col col-locations clearfix">
-							<?php 
-							$locations = carbon_get_theme_option( 'locations', 'complex' );
-
-							if ( !empty( $locations ) ) : 
-
-								if ( $locations_title = carbon_get_theme_option( 'location_section_title' ) ) : ?>
-								<h2><?php echo $locations_title; ?></h2>
-								<?php endif; ?>
-
-								<div class="locations clearfix">
-									<div class="map">
-										<?php foreach ( $locations as $count => $l ) {
-											if  ( $l['map'] ) {
-												$coordinates = explode( ',', $l['map'] );
-												$lat = $coordinates[0];
-												$lng = $coordinates[1];
-											}
-
-											?>
-											<div class="map-holder">
-												<?php if ( $l['directions_link'] ) : ?>
-												<a href="<?php echo esc_attr( $l['directions_link'] ); ?>" class="map-btn" target="_blank" rel="nofollow">Get Directions<em class="arr"></em></a>
-												<?php endif; 
-
-												if ( !empty( $coordinates ) ) : ?>
-													<div id="map-<?php echo $count ?>" class="map-wrapper"></div>	 
-												<?php endif; ?>
-											</div>
-											<?php
-										} ?>
-									</div>
-
-									<div class="address">
-										<?php foreach ( $locations as $l ) : ?>
-											<div class="address-holder">
-												<h4><?php echo $l['location_title'] ?></h4>
-
-												<?php 
-												if ( $l['address'] ){
-													echo wpautop( $l['address'] );
-												} ?>
-											</div>
-										<?php endforeach; ?>
-									</div>
-
-									<div class="cities">
-										<ul class="clearfix">
-											<?php foreach ( $locations as $l ) {
-												echo '<li><a href="#">' . $l['location_title'] . '</a></li>';
-											} ?>
-										</ul>
-									</div>
-								</div>
-								<!-- end of locations -->
-							<?php endif; ?>
+						<div class="col clearfix">
+							<img src="./wp-content/uploads/lundy-law-logo-white.png">
+							<p>
+								When you’ve been injured, the last thing on your mind is filing legal paperwork. That’s what we’re here for. Lundy Law has years of experience handling a variety of legal claims, and our attorneys have developed a reputation for getting results.
+							</p>
+							<a href="#">
+								Center City <br>
+								1635 Market Street,19th Floor, Philadelphia, PA 19103 <br>
+								215-567-3000
+							</a>
 						</div>
+						<div class="col clearfix">
+							<h4>Navigate & Connect</h4>
+							<?php 
+								wp_nav_menu( array(
+									'theme_location'  => 'footer-menu',
+									'container'       => true, 
+									'fallback_cb'     => false,
+									'depth'			  => 1
+								));
+							?>
+							<p>Sign up to receive our bi-monthly e-newsletter.</p>
 
-						<?php 
-						$social_icons = carbon_get_theme_option( 'social_icons', 'complex' );
-						$additional_links = carbon_get_theme_option( 'additional_link', 'complex' );
-						
 
-						if ( !empty( $social_icons ) || !empty( $additional_links ) ) : ?>
-							<div class="col">
-								<?php if ( $connect_title = carbon_get_theme_option( 'social_section_title' ) ) : ?>
-								<h2><?php echo $connect_title; ?></h2>
-								<?php endif; ?>
-
-								<?php if ( !empty( $social_icons ) ) : ?>
-								<div class="socials clearfix">
-									<?php foreach ( $social_icons as $icon ) : ?>
-									<a target="_blank" href="<?php echo esc_attr( $icon['link'] ); ?>">
-										<?php echo wp_get_attachment_image( $icon['icon'], 'social-icon' ); ?>
-									</a>
-									<?php endforeach; ?>
-								</div>
-								<!-- end of socials -->
-								<?php endif; ?>
-							</div>
-						<?php endif; ?>
+						</div>
 
 					</div>
 					<!-- end of footer-cols -->
@@ -95,18 +39,16 @@
 			<!-- end of footer-top -->
 
 			<div class="footer-bottom">
-<br/>Lundy Law does business in Pennsylvania and New Jersey as a Pennsylvania Limited Liability Partnership, and in Delaware as a Limited Liability Company. 
-<br/>Legal services in Pennsylvania shall be performed primarily in Philadelphia; New Jersey in Cherry Hill and Delaware in Wilmington. Cases may referred to associated law firms.
-				<div class="shell">
-					<?php 
-					wp_nav_menu( array(
-						'theme_location'  => 'footer-menu',
-						'container'       => false, 
-						'fallback_cb'     => false,
-						'depth'			  => 1
-					));
-					
 
+				<div class="shell">
+
+					<p>
+						Lundy Law does business in Pennsylvania and New Jersey as a Pennsylvania Limited Liability Partnership, and in Delaware as a Limited Liability Company. 
+						<br>
+						Legal services in Pennsylvania shall be performed primarily in Philadelphia; New Jersey in Cherry Hill and Delaware in Wilmington. Cases may referred to associated law firms.
+					</p>
+					
+					<?php
 					if ( $copy = carbon_get_theme_option( 'copyright' ) ) {
 						echo wpautop( $copy );
 					} ?>					
@@ -136,40 +78,7 @@
 		
 		
 		
-<?php 
 
-// script for Google Maps boxes
-
-$locations = carbon_get_theme_option( 'locations', 'complex' );
-
-if ( !empty( $locations ) ) : 
-
-	foreach ( $locations as $count => $l ) {
-		if  ( $l['map'] ) {
-			$coordinates = explode( ',', $l['map'] );
-			$lat = $coordinates[0];
-			$lng = $coordinates[1];
-		}
-			if ( !empty( $coordinates ) ) : ?>
-				  <script type="text/javascript">
-
-		                var center = new google.maps.LatLng(<?php echo $lat ?>, <?php echo $lng ?>);
-		                var id = 'map-'+<?php echo $count; ?>;
-		                var map = new google.maps.Map(document.getElementById(id), {
-		                    center: center,
-		                    zoom: 14,
-		                    mapTypeId: google.maps.MapTypeId.ROADMAP
-		                });
-		                var marker = new google.maps.Marker({
-		                    position: center,
-		                    map: map,
-		                    location: center
-		                });
-
-	                </script>   
-				<?php endif; ?>
-			<?php } ?>
-<?php endif; ?>
 
 
 <?php 

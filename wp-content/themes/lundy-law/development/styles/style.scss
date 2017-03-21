@@ -4,6 +4,7 @@
 Notes:
 
 removed hablamos espanol menu items (database)
+updated footer menu (database)
 \************************/
 
 @import 'partials/legacyfonts';
@@ -21,7 +22,10 @@ $reg: 400;
 $bold: 700;
 
 //$blue: #005B90;
+$blue-dark: #15304A;
 $blue: #265B8D;
+$blue-med: #2484BC;
+$blue-light: #57A0D1;
 $yellow: #FFBF2E;
 $gray: #767676;
 
@@ -35,9 +39,23 @@ h6 {}
 */
 
 span, 
-a {
+a,
+p {
 	font-family: $lato; 
 	font-weight: $light;
+}
+
+a {
+	color: $blue-light;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $lato; 
 }
 
 button {
@@ -131,14 +149,43 @@ body > .shell {
 }
 
 #footer {
-	margin-bottom: 24px;
+	//margin-bottom: 24px;
+	p {
+		color: #fff;
+	}
+}
+
+.footer-top { 
+	background-color: $blue;
+
+	ul {
+		list-style: none;
+		clear: both;
+
+		li {
+			width: 33%;
+			float: left;
+
+			:last-child {
+				clear: both;
+			}
+		}
+	}
+
+	p {
+		clear: both;
+	}
+}
+
+.footer-bottom { 
+	background-color: $blue-dark;
 }
 
 //3rd party style overwrites
 .liveChatFloatingButtonTop {
 	bottom: 0 !important;
 	top: auto !important;
-	display: none;
+	display: none !important;
 }
 
 .liveChatFloatingButtonSpacer {

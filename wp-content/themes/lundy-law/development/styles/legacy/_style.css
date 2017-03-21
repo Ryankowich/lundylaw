@@ -84,6 +84,8 @@ textarea { overflow: auto; }
 .left, .alignleft { float: left; display: inline; }
 .right, .alignright { float: right; display: inline; }
 
+/* LM */
+/*
 h1 { color: #000; font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 36px; line-height: 36px; font-weight: normal; margin-bottom: 8px;text-transform: uppercase; }
 h2 { color: #123f99; font-size: 30px; line-height: 30px; font-weight: normal; font-style: italic; margin-bottom: 36px; }
 h3 { font-family: 'TradeGothicLTStd', arial, helvetica, sans-serif; font-size: 24px; line-height: 24px; font-weight: normal; }
@@ -95,6 +97,7 @@ h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal
 .h3 { font-family: 'TradeGothicLTStd', arial, helvetica, sans-serif; color: #123f99; font-size: 24px; line-height: 24px; font-weight: light; font-style: italic; }
 .h4 { font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 24px; line-height: 27px; font-weight: normal; text-transform: uppercase; font-style: normal; }
 .h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal; }
+*/
 
 .sections h2 { color: #000; font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 36px; line-height: 36px; font-weight: normal; margin-bottom: 8px;text-transform: uppercase; font-style: normal;}
 
@@ -397,7 +400,10 @@ blockquote:after {
 .section .section-holder p { padding-bottom: 30px; }
 .section .section-holder a.btn { margin-bottom: 20px; }
 
+/* LM */
+/*
 .footer-top { background: url(images/footer-top.png) repeat 0 0; }
+*/
 .footer-top .shell { padding: 22px 0 28px 0; }
 
 .footer-cols { padding-right: 20px; }
@@ -436,7 +442,10 @@ blockquote:after {
 .footer-cols .col .app-newsletter ul li a { color: #fff; display: inline-block; }
 .footer-cols .col .app-newsletter ul li a:hover { color: #8c8c8c; text-decoration: none; }
 
+/* LM */
+/*
 .footer-bottom { background: url(images/footer-bottom.png) repeat 0 0; font-size: 14px; line-height: 22px; color: #787878; text-align: center; }
+*/
 .footer-bottom .shell { padding: 27px 0 27px 0; }
 .footer-bottom ul { list-style: none; list-style-position: outside; display: inline; }
 .footer-bottom ul li { display: inline; }

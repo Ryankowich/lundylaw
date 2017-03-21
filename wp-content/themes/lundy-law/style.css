@@ -1,6 +1,7 @@
 /************************Notes:
 
 removed hablamos espanol menu items (database)
+updated footer menu (database)
 \************************/
 @font-face {
   font-family: 'TradeGothicLTStdBdCn20';
@@ -238,83 +239,20 @@ textarea {
   float: right;
   display: inline; }
 
-h1 {
-  color: #000;
-  font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif;
-  font-size: 36px;
-  line-height: 36px;
-  font-weight: normal;
-  margin-bottom: 8px;
-  text-transform: uppercase; }
+/* LM */
+/*
+h1 { color: #000; font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 36px; line-height: 36px; font-weight: normal; margin-bottom: 8px;text-transform: uppercase; }
+h2 { color: #123f99; font-size: 30px; line-height: 30px; font-weight: normal; font-style: italic; margin-bottom: 36px; }
+h3 { font-family: 'TradeGothicLTStd', arial, helvetica, sans-serif; font-size: 24px; line-height: 24px; font-weight: normal; }
+h4 { font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 24px; line-height: 27px; font-weight: normal; text-transform: uppercase; }
+h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal; }
 
-h2 {
-  color: #123f99;
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: normal;
-  font-style: italic;
-  margin-bottom: 36px; }
-
-h3 {
-  font-family: 'TradeGothicLTStd', arial, helvetica, sans-serif;
-  font-size: 24px;
-  line-height: 24px;
-  font-weight: normal; }
-
-h4 {
-  font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif;
-  font-size: 24px;
-  line-height: 27px;
-  font-weight: normal;
-  text-transform: uppercase; }
-
-h5 {
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: normal;
-  font-style: normal; }
-
-.h1 {
-  color: #000;
-  font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif;
-  font-size: 36px;
-  line-height: 36px;
-  font-weight: normal;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  font-style: normal; }
-
-.h2 {
-  color: #123f99;
-  font-size: 30px;
-  line-height: 30px;
-  font-weight: normal;
-  font-style: italic;
-  margin-bottom: 36px;
-  font-style: normal; }
-
-.h3 {
-  font-family: 'TradeGothicLTStd', arial, helvetica, sans-serif;
-  color: #123f99;
-  font-size: 24px;
-  line-height: 24px;
-  font-weight: light;
-  font-style: italic; }
-
-.h4 {
-  font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif;
-  font-size: 24px;
-  line-height: 27px;
-  font-weight: normal;
-  text-transform: uppercase;
-  font-style: normal; }
-
-.h5 {
-  font-size: 20px;
-  line-height: 22px;
-  font-weight: normal;
-  font-style: normal; }
-
+.h1 { color: #000; font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 36px; line-height: 36px; font-weight: normal; margin-bottom: 8px;text-transform: uppercase; font-style: normal; }
+.h2 { color: #123f99; font-size: 30px; line-height: 30px; font-weight: normal; font-style: italic; margin-bottom: 36px; font-style: normal; }
+.h3 { font-family: 'TradeGothicLTStd', arial, helvetica, sans-serif; color: #123f99; font-size: 24px; line-height: 24px; font-weight: light; font-style: italic; }
+.h4 { font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif; font-size: 24px; line-height: 27px; font-weight: normal; text-transform: uppercase; font-style: normal; }
+.h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal; }
+*/
 .sections h2 {
   color: #000;
   font-family: 'TradeGothicLTStdBdCn20', arial, helvetica, sans-serif;
@@ -1119,9 +1057,10 @@ blockquote:after {
 .section .section-holder a.btn {
   margin-bottom: 20px; }
 
-.footer-top {
-  background: url(images/footer-top.png) repeat 0 0; }
-
+/* LM */
+/*
+.footer-top { background: url(images/footer-top.png) repeat 0 0; }
+*/
 .footer-top .shell {
   padding: 22px 0 28px 0; }
 
@@ -1302,13 +1241,10 @@ blockquote:after {
   color: #8c8c8c;
   text-decoration: none; }
 
-.footer-bottom {
-  background: url(images/footer-bottom.png) repeat 0 0;
-  font-size: 14px;
-  line-height: 22px;
-  color: #787878;
-  text-align: center; }
-
+/* LM */
+/*
+.footer-bottom { background: url(images/footer-bottom.png) repeat 0 0; font-size: 14px; line-height: 22px; color: #787878; text-align: center; }
+*/
 .footer-bottom .shell {
   padding: 27px 0 27px 0; }
 
@@ -2249,9 +2185,6 @@ div.videoplayer.inset-right {
   background: transparent;
   padding: 0; }
 
-ul {
-  color: red; }
-
 /*
 h1 {}
 h2 {}
@@ -2261,9 +2194,21 @@ h5 {}
 h6 {}
 */
 span,
-a {
+a,
+p {
   font-family: "Lato", sans-serif;
   font-weight: 300; }
+
+a {
+  color: #57A0D1; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lato", sans-serif; }
 
 button {
   background-color: #FFBF2E;
@@ -2330,13 +2275,29 @@ body > .shell {
   top: 50%;
   color: #fff; }
 
-#footer {
-  margin-bottom: 24px; }
+#footer p {
+  color: #fff; }
+
+.footer-top {
+  background-color: #265B8D; }
+  .footer-top ul {
+    list-style: none;
+    clear: both; }
+    .footer-top ul li {
+      width: 33%;
+      float: left; }
+      .footer-top ul li :last-child {
+        clear: both; }
+  .footer-top p {
+    clear: both; }
+
+.footer-bottom {
+  background-color: #15304A; }
 
 .liveChatFloatingButtonTop {
   bottom: 0 !important;
   top: auto !important;
-  display: none; }
+  display: none !important; }
 
 .liveChatFloatingButtonSpacer {
   display: none; }

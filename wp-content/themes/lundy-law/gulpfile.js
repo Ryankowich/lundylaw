@@ -28,8 +28,8 @@ gulp.task('scripts', function() {
 
 //livereload any php edits
 gulp.task('php', function() {
-	gulp.src('./header.php')
-		.pipe(notify("Header PHP files updated."))
+	gulp.src('./footer.php')
+		.pipe(notify("Current PHP file updated."))
 		.pipe(livereload());
 });
 
@@ -37,5 +37,5 @@ gulp.task('watch', function () {
 	livereload.listen();
 	gulp.watch('./development/styles/*.scss', ['sass'] );
 	gulp.watch('./development/scripts/*.js', ['scripts']);
-	gulp.watch('./header.php', ['php']);
+	gulp.watch('./footer.php', ['php']);
 });
