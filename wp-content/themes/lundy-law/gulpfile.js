@@ -28,7 +28,7 @@ gulp.task('scripts', function() {
 
 //livereload any php edits
 gulp.task('php', function() {
-	gulp.src('./footer.php')
+	gulp.src('./template-home.php')
 		.pipe(notify("Current PHP file updated."))
 		.pipe(livereload());
 });
@@ -37,5 +37,5 @@ gulp.task('watch', function () {
 	livereload.listen();
 	gulp.watch('./development/styles/*.scss', ['sass'] );
 	gulp.watch('./development/scripts/*.js', ['scripts']);
-	gulp.watch('./footer.php', ['php']);
+	gulp.watch('./template-home.php', ['php']);
 });

@@ -1,5 +1,7 @@
 //@import 'framework/skeleton';
 
+// try https://purecss.io/grids/
+
 /************************\
 Notes:
 
@@ -11,9 +13,7 @@ updated footer menu (database)
 
 @import 'legacy/style';
 
-@import 'partials/test';
-
-$font-stack: 'Questrial', arial, helvetica, sans-serif;
+$questrial: 'Questrial', arial, helvetica, sans-serif;
 $lato: 'Lato', sans-serif;
 
 //dont forget to remove unused 
@@ -22,21 +22,18 @@ $reg: 400;
 $bold: 700;
 
 //$blue: #005B90;
-$blue-dark: #15304A;
+$blue-lighter: #57A0D1;
+$blue-light: #2484BC;
 $blue: #265B8D;
-$blue-med: #2484BC;
-$blue-light: #57A0D1;
+$blue-dark: #15304A;
 $yellow: #FFBF2E;
 $gray: #767676;
 
-/*
-h1 {}
-h2 {}
-h3 {}
-h4 {}
-h5 {}
-h6 {}
-*/
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
 
 span, 
 a,
@@ -47,6 +44,10 @@ p {
 
 a {
 	color: $blue-light;
+}
+
+p {
+	color: $gray;
 }
 
 h1,
@@ -70,6 +71,25 @@ button {
 	cursor: pointer;
 }
 
+.clearfix { *zoom: 1; }
+.clearfix:after { content: ''; font-size: 0; line-height: 0; display: block; clear: both; }
+
+.three.columns {
+	width: 31%;
+	float: left;
+	padding: 1%;
+}
+.two.columns {
+	width: 46%;
+	float: left;
+	padding: 2%;
+}
+
+.shell {
+	width: 960px;
+	margin: 0 auto; 
+}
+
 //header & nav section
 #header {
 	position: fixed;
@@ -88,16 +108,11 @@ button {
 }
 
 .header-bottom { 
-	font-family: $font-stack; 
+	font-family: $lato; 
 	font-size: 14px; 
 	line-height: 60px; 
-	//background: url(images/shadow.png) no-repeat center bottom; 
 	background: #fff;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-body > .shell {
-	margin-top: 100px;
 }
 
 #navigation { 
@@ -147,6 +162,43 @@ body > .shell {
 	top: 50%;
 	color: #fff;
 }
+
+/************************\
+		  HOME
+\************************/
+
+.page-home .hero-background {
+	background: url(https://www.lundylaw.com/wp-content/uploads/JL-Banner-2.png);
+	background-size: cover;
+}
+
+.three-descriptors {
+
+	.columns:nth-child(1) {
+		background-color: $blue-lighter;
+	}
+	.columns:nth-child(2) {
+		background-color: $blue-light;
+	}
+	.columns:nth-child(3) {
+		background-color: $blue;
+	}
+}
+.hero-background {
+	margin-top: 100px;
+	height: 400px;
+
+	h2 {
+		background-color: $blue;
+		display: inline-block;
+		line-height: 35px;
+	}
+}
+
+
+/************************\
+		  FOOTER
+\************************/
 
 #footer {
 	//margin-bottom: 24px;

@@ -7,7 +7,7 @@
 				<div class="shell">
 					<div class="footer-cols clearfix">
 						<div class="col clearfix">
-							<img src="./wp-content/uploads/lundy-law-logo-white.png">
+							<img src="http://localhost:8888/lundylaw/wp-content/uploads/lundy-law-logo-white.png">
 							<p>
 								When you’ve been injured, the last thing on your mind is filing legal paperwork. That’s what we’re here for. Lundy Law has years of experience handling a variety of legal claims, and our attorneys have developed a reputation for getting results.
 							</p>

@@ -2,8 +2,6 @@
 
 <div id="filtered-practice-areas" class="sections">
 
-	<h2>Practice Areas</h2>
-
     <div class="button-group filter-button-group">
         <button data-filter="*">show all</button>
         <button data-filter=".auto">auto</button>
