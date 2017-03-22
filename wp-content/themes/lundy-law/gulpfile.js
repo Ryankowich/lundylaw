@@ -29,7 +29,7 @@ gulp.task('scripts', function() {
 //livereload any php edits
 gulp.task('php', function() {
 	gulp.src('./template-home.php')
-		.pipe(notify("Current PHP file updated."))
+		.pipe(notify("template-home.php updated."))
 		.pipe(livereload());
 });
 
@@ -37,5 +37,5 @@ gulp.task('watch', function () {
 	livereload.listen();
 	gulp.watch('./development/styles/*.scss', ['sass'] );
 	gulp.watch('./development/scripts/*.js', ['scripts']);
-	gulp.watch('./template-home.php', ['php']);
+	gulp.watch('./*.php', ['php']);
 });

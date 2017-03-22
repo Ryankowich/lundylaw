@@ -103,6 +103,22 @@ return t=a?function(t){return t&&a(r(t))}:function(t){return t&&r(t)}}function e
 ***************************************/
 
 jQuery(document).ready(function($) {
+    $('#accordion').find('.accordion-toggle').click(function(){
+
+      //Expand or collapse this panel
+      $(this).next().slideToggle('fast');
+
+      //Hide the other panels
+      $(".accordion-content").not($(this).next()).slideUp('fast');
+
+    });
+  });
+
+/***************************************
+*       FILTERED PRACTICE AREAS        *
+***************************************/
+
+jQuery(document).ready(function($) {
 	var $grid = $('.grid').isotope({
 		itemSelector: '.element-item',
 		layoutMode: 'fitRows'

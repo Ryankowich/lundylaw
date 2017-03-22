@@ -1,0 +1,163 @@
+/************************\
+	 GLOBAL STYLES
+\************************/
+
+$questrial: 'Questrial', arial, helvetica, sans-serif;
+$lato: 'Lato', sans-serif;
+
+//dont forget to remove unused 
+$light: 300;
+$reg: 400;
+$bold: 700;
+
+//$blue: #005B90;
+$blue-lighter: #57A0D1;
+$blue-light: #2484BC;
+$blue: #265B8D;
+$blue-dark: #15304A;
+$yellow: #FFBF2E;
+$gray-light: #E3E3E3;
+$gray: #767676;
+
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+html {
+	font-size: 14px;
+}
+
+span, 
+a,
+p {
+	font-family: $lato; 
+	font-weight: $light;
+	font-size: 1rem;
+}
+
+a {
+	color: $blue-light;
+}
+
+p {
+	color: $gray;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $lato; 
+}
+
+button,
+.button {
+	background-color: $yellow;
+	font-family: $lato; 
+	font-weight: $reg;
+	color: #fff;
+	border: 0;
+	border-radius: 3px;
+	padding: 7px 13px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+button.blue,
+.button.blue {
+	background-color: $blue-lighter;
+}
+
+.white-text {
+	color: #fff;
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	span, 
+	p {
+		color: #fff;
+	}
+}
+
+.blue-text {
+	color: $blue-light;
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	span, 
+	p {
+		color: $blue-light;
+	}
+}
+
+.accordion-toggle {
+	cursor: pointer;
+}
+
+.accordion-content {
+	display: none;
+}
+
+.accordion-content.default {
+	display: block;
+}
+
+/*****  FOOTER  *****/
+
+#footer {
+	p,
+	a {
+		font-size: 1rem;
+		line-height: 22px;
+	}
+}
+
+.footer-top { 
+	background-color: $blue;
+
+	ul {
+		list-style: none;
+		clear: both;
+
+		li {
+			width: 33%;
+			float: left;
+
+			:last-child {
+				clear: both;
+			}
+		}
+	}
+
+	p {
+		clear: both;
+	}
+}
+
+.footer-bottom { 
+	background-color: $blue-dark;
+}
+
+//3rd party style overwrites
+.liveChatFloatingButtonTop {
+	bottom: 0 !important;
+	top: auto !important;
+	display: none !important;
+}
+
+.liveChatFloatingButtonSpacer {
+	display: none;
+}

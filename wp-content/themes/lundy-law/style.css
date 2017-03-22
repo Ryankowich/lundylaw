@@ -806,63 +806,21 @@ h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal
   font-style: italic;
   color: #123f99; }
 
-.faq-section {
-  width: 960px;
-  text-align: center;
-  padding: 0 13px 20px 13px;
-  background: url(images/sep.png) no-repeat center bottom;
-  position: relative;
-  margin: 0 -13px 25px -13px; }
-
-.page-template-template-faq-php .faq-section {
-  background: none; }
-
-.faq-section.no-border {
-  background: none; }
-
-.faq-section h2 {
-  padding-bottom: 29px; }
-
-.faq-section .cols {
-  padding: 0 26px 21px 26px;
-  text-align: left; }
-
-.faq-section .cols .col {
-  width: 360px;
-  float: left;
-  display: inline;
-  padding: 0 47px; }
-
-.faq-section .cols .col ul {
-  list-style: none;
-  list-style-position: outside;
-  line-height: 22px; }
-
-.faq-section .cols .col ul li {
-  display: block;
-  min-height: 50px;
-  position: relative;
-  padding: 10px 0 10px 0; }
-
-.faq-section .cols .col ul li + li {
-  border-top: 1px solid #c6c6c6; }
-
-.faq-section .cols .col ul li:after {
-  content: '';
-  height: 5px;
-  width: 6px;
-  background: url(images/dot.png) no-repeat 0 0;
-  position: absolute;
-  top: 20px;
-  left: -16px; }
-
-.faq-section .cols .col ul li a:hover {
-  color: #000;
-  text-decoration: none; }
-
-.faq-section a.btn {
-  margin-bottom: 20px; }
-
+/* LM */
+/*
+.faq-section { width: 960px; text-align: center; padding: 0 13px 20px 13px; background: url(images/sep.png) no-repeat center bottom; position: relative; margin: 0 -13px 25px -13px; }
+.page-template-template-faq-php .faq-section { background: none; }
+.faq-section.no-border { background: none;  }
+.faq-section h2 { padding-bottom: 29px; }
+.faq-section .cols { padding: 0 26px 21px 26px; text-align: left; }
+.faq-section .cols .col { width: 360px; float: left; display: inline; padding: 0 47px; }
+.faq-section .cols .col ul { list-style: none; list-style-position: outside; line-height: 22px; }
+.faq-section .cols .col ul li { display: block; min-height: 50px; position: relative; padding: 10px 0 10px 0; }
+.faq-section .cols .col ul li + li { border-top: 1px solid #c6c6c6; }
+.faq-section .cols .col ul li:after { content: ''; height: 5px; width: 6px; background: url(images/dot.png) no-repeat 0 0; position: absolute; top: 20px; left: -16px; }
+.faq-section .cols .col ul li a:hover { color: #000; text-decoration: none; }
+.faq-section a.btn { margin-bottom: 20px; }
+*/
 a.btn {
   background: #d7d7d7;
   display: inline-block;
@@ -2185,6 +2143,116 @@ div.videoplayer.inset-right {
   background: transparent;
   padding: 0; }
 
+/************************	 GLOBAL STYLES
+\************************/
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0; }
+
+html {
+  font-size: 14px; }
+
+span,
+a,
+p {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 1rem; }
+
+a {
+  color: #2484BC; }
+
+p {
+  color: #767676; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lato", sans-serif; }
+
+button,
+.button {
+  background-color: #FFBF2E;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  padding: 7px 13px;
+  text-transform: uppercase;
+  cursor: pointer; }
+
+button.blue,
+.button.blue {
+  background-color: #57A0D1; }
+
+.white-text {
+  color: #fff; }
+  .white-text h1,
+  .white-text h2,
+  .white-text h3,
+  .white-text h4,
+  .white-text h5,
+  .white-text h6,
+  .white-text span,
+  .white-text p {
+    color: #fff; }
+
+.blue-text {
+  color: #2484BC; }
+  .blue-text h1,
+  .blue-text h2,
+  .blue-text h3,
+  .blue-text h4,
+  .blue-text h5,
+  .blue-text h6,
+  .blue-text span,
+  .blue-text p {
+    color: #2484BC; }
+
+.accordion-toggle {
+  cursor: pointer; }
+
+.accordion-content {
+  display: none; }
+
+.accordion-content.default {
+  display: block; }
+
+/*****  FOOTER  *****/
+#footer p,
+#footer a {
+  font-size: 1rem;
+  line-height: 22px; }
+
+.footer-top {
+  background-color: #265B8D; }
+  .footer-top ul {
+    list-style: none;
+    clear: both; }
+    .footer-top ul li {
+      width: 33%;
+      float: left; }
+      .footer-top ul li :last-child {
+        clear: both; }
+  .footer-top p {
+    clear: both; }
+
+.footer-bottom {
+  background-color: #15304A; }
+
+.liveChatFloatingButtonTop {
+  bottom: 0 !important;
+  top: auto !important;
+  display: none !important; }
+
+.liveChatFloatingButtonSpacer {
+  display: none; }
+
 .one.columns {
   width: 4.33%;
   padding: 2%; }
@@ -2236,42 +2304,6 @@ div.videoplayer.inset-right {
 .columns {
   float: left; }
 
-* {
-  margin: 0;
-  padding: 0;
-  outline: 0; }
-
-span,
-a,
-p {
-  font-family: "Lato", sans-serif;
-  font-weight: 300; }
-
-a {
-  color: #2484BC; }
-
-p {
-  color: #767676; }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Lato", sans-serif; }
-
-button {
-  background-color: #FFBF2E;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  color: #fff;
-  border: 0;
-  border-radius: 3px;
-  padding: 7px 13px;
-  text-transform: uppercase;
-  cursor: pointer; }
-
 .clearfix {
   *zoom: 1; }
 
@@ -2301,7 +2333,7 @@ button {
 
 .header-bottom {
   font-family: "Lato", sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   line-height: 60px;
   background: #fff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); }
@@ -2327,7 +2359,7 @@ button {
     margin-left: 20px; }
   .pre-nav span, .pre-nav a {
     color: #fff;
-    font-size: 14px; }
+    font-size: 1rem; }
   .pre-nav .shell {
     text-align: right; }
 
@@ -2360,31 +2392,14 @@ button {
     display: inline-block;
     line-height: 35px; }
 
-/************************		  FOOTER
-\************************/
-#footer p {
-  color: #fff; }
-
-.footer-top {
+.cta {
   background-color: #265B8D; }
-  .footer-top ul {
-    list-style: none;
-    clear: both; }
-    .footer-top ul li {
-      width: 33%;
-      float: left; }
-      .footer-top ul li :last-child {
-        clear: both; }
-  .footer-top p {
-    clear: both; }
 
-.footer-bottom {
-  background-color: #15304A; }
+.faq-section .faq:nth-child(odd) {
+  background-color: #E3E3E3; }
 
-.liveChatFloatingButtonTop {
-  bottom: 0 !important;
-  top: auto !important;
-  display: none !important; }
+.faq-section .four {
+  background-color: #2484BC; }
 
-.liveChatFloatingButtonSpacer {
-  display: none; }
+.logo-carousel {
+  background-color: #E3E3E3; }

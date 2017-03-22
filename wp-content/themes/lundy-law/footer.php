@@ -2,7 +2,7 @@
 		</div>
 		<?php endif; ?>
 		
-		<div id="footer">
+		<div id="footer" class="white-text">
 			<div class="footer-top">
 				<div class="shell">
 					<div class="footer-cols clearfix">

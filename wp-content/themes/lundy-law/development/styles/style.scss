@@ -9,73 +9,17 @@ removed hablamos espanol menu items (database)
 updated footer menu (database)
 \************************/
 
-@import 'partials/legacyfonts';
+@import 'legacy/fonts';
 
 @import 'legacy/style';
 
-@import 'partials/grid';
+@import 'partials/global-styles';
 
-$questrial: 'Questrial', arial, helvetica, sans-serif;
-$lato: 'Lato', sans-serif;
+@import 'framework/grid';
 
-//dont forget to remove unused 
-$light: 300;
-$reg: 400;
-$bold: 700;
-
-//$blue: #005B90;
-$blue-lighter: #57A0D1;
-$blue-light: #2484BC;
-$blue: #265B8D;
-$blue-dark: #15304A;
-$yellow: #FFBF2E;
-$gray: #767676;
-
-* {
-	margin: 0;
-	padding: 0;
-	outline: 0;
-}
-
-span, 
-a,
-p {
-	font-family: $lato; 
-	font-weight: $light;
-}
-
-a {
-	color: $blue-light;
-}
-
-p {
-	color: $gray;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: $lato; 
-}
-
-button {
-	background-color: $yellow;
-	font-family: $lato; 
-	font-weight: $reg;
-	color: #fff;
-	border: 0;
-	border-radius: 3px;
-	padding: 7px 13px;
-	text-transform: uppercase;
-	cursor: pointer;
-}
 
 .clearfix { *zoom: 1; }
 .clearfix:after { content: ''; font-size: 0; line-height: 0; display: block; clear: both; }
-
 
 .shell {
 	width: 960px;
@@ -101,7 +45,7 @@ button {
 
 .header-bottom { 
 	font-family: $lato; 
-	font-size: 14px; 
+	font-size: 1rem; 
 	line-height: 60px; 
 	background: #fff;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -139,7 +83,7 @@ button {
 
 	span, a {
 		color: #fff;
-		font-size: 14px;
+		font-size: 1rem;
 	}
 
 	.shell {
@@ -186,52 +130,21 @@ button {
 		line-height: 35px;
 	}
 }
-
-
-/************************\
-		  FOOTER
-\************************/
-
-#footer {
-	//margin-bottom: 24px;
-	p {
-		color: #fff;
-	}
-}
-
-.footer-top { 
+.cta {
 	background-color: $blue;
+}
 
-	ul {
-		list-style: none;
-		clear: both;
+.faq-section {
 
-		li {
-			width: 33%;
-			float: left;
-
-			:last-child {
-				clear: both;
-			}
-		}
+	.faq:nth-child(odd) {
+		background-color: $gray-light;
 	}
 
-	p {
-		clear: both;
+	.four {
+		background-color: $blue-light;
 	}
 }
 
-.footer-bottom { 
-	background-color: $blue-dark;
-}
-
-//3rd party style overwrites
-.liveChatFloatingButtonTop {
-	bottom: 0 !important;
-	top: auto !important;
-	display: none !important;
-}
-
-.liveChatFloatingButtonSpacer {
-	display: none;
+.logo-carousel {
+	background-color: $gray-light;
 }

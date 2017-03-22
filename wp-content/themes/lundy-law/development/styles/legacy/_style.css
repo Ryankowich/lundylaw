@@ -242,6 +242,8 @@ h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal
 .videos .video .video-img a:hover span.play-btn { opacity: 0.7; -moz-opacity: 0.7; filter:alpha(opacity=70); transform: scale(0.9); -webkit-transform: scale(0.9); -moz-transform: scale(0.9); -o-transform: scale(0.9);}
 .videos .video h5 { font-size: 18px; line-height: 21px; font-style: italic; color: #123f99; }
 
+/* LM */
+/*
 .faq-section { width: 960px; text-align: center; padding: 0 13px 20px 13px; background: url(images/sep.png) no-repeat center bottom; position: relative; margin: 0 -13px 25px -13px; }
 .page-template-template-faq-php .faq-section { background: none; }
 .faq-section.no-border { background: none;  }
@@ -254,6 +256,7 @@ h5 { font-size: 20px; line-height: 22px; font-weight: normal; font-style: normal
 .faq-section .cols .col ul li:after { content: ''; height: 5px; width: 6px; background: url(images/dot.png) no-repeat 0 0; position: absolute; top: 20px; left: -16px; }
 .faq-section .cols .col ul li a:hover { color: #000; text-decoration: none; }
 .faq-section a.btn { margin-bottom: 20px; }
+*/
 
 a.btn { background: #d7d7d7; display: inline-block; color: #444; font-style: italic; position: relative; border: 1px solid #c2c2c2; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); -o-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); }
 a.btn span { height: 37px; border-top: 1px solid #fff; padding: 0 57px 0 26px; display: block; line-height: 37px;border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; background: url(images/btn-glow.png) no-repeat center 0; }
