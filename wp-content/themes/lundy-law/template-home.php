@@ -7,7 +7,7 @@ get_header();
 	the_post(); 
 ?>
 
-	<div class="hero-background">
+	<div class="hero-background white-text">
 		<div class="shell">
 			<h2>
 				Winning hundreds of millions <br>
@@ -16,7 +16,7 @@ get_header();
 			</h2>
 		</div>
 	</div>
-	<div class="three-descriptors clearfix">
+	<div class="three-descriptors clearfix equal-vert-height-container">
 		<div class="shell white-text">
 			<div class="four columns">
 				<h3>Our Service Areas</h3>

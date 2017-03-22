@@ -2223,12 +2223,11 @@ button.blue,
 .accordion-content.default {
   display: block; }
 
-/*****  FOOTER  *****/
-#footer p,
-#footer a {
-  font-size: 1rem;
-  line-height: 22px; }
+.equal-vert-height-container .shell {
+  display: flex;
+  align-items: stretch; }
 
+/*****  FOOTER  *****/
 .footer-top {
   background-color: #265B8D; }
   .footer-top ul {
@@ -2239,11 +2238,16 @@ button.blue,
       float: left; }
       .footer-top ul li :last-child {
         clear: both; }
-  .footer-top p {
-    clear: both; }
+  .footer-top p,
+  .footer-top a {
+    font-size: 1rem;
+    line-height: 22px; }
 
 .footer-bottom {
-  background-color: #15304A; }
+  background-color: #15304A;
+  text-align: center; }
+  .footer-bottom p {
+    font-size: 0.8rem; }
 
 .liveChatFloatingButtonTop {
   bottom: 0 !important;
@@ -2375,14 +2379,16 @@ button.blue,
   background: url(https://www.lundylaw.com/wp-content/uploads/JL-Banner-2.png);
   background-size: cover; }
 
-.three-descriptors .columns:nth-child(1) {
-  background-color: #57A0D1; }
-
-.three-descriptors .columns:nth-child(2) {
-  background-color: #2484BC; }
-
-.three-descriptors .columns:nth-child(3) {
-  background-color: #265B8D; }
+.three-descriptors {
+  background-color: #57A0D1;
+  background-image: linear-gradient(90deg, transparent 50%, #265B8D 50%);
+  background-size: 100% 100%; }
+  .three-descriptors .columns:nth-child(1) {
+    background-color: #57A0D1; }
+  .three-descriptors .columns:nth-child(2) {
+    background-color: #2484BC; }
+  .three-descriptors .columns:nth-child(3) {
+    background-color: #265B8D; }
 
 .hero-background {
   margin-top: 100px;
@@ -2399,7 +2405,7 @@ button.blue,
   background-color: #E3E3E3; }
 
 .faq-section .four {
-  background-color: #2484BC; }
+  background-color: #57A0D1; }
 
 .logo-carousel {
   background-color: #E3E3E3; }

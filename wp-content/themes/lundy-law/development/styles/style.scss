@@ -109,6 +109,9 @@ updated footer menu (database)
 }
 
 .three-descriptors {
+	background-color: $blue-lighter;
+	background-image: linear-gradient(90deg, transparent 50%, $blue 50%);
+	background-size: 100% 100%;
 
 	.columns:nth-child(1) {
 		background-color: $blue-lighter;
@@ -141,7 +144,7 @@ updated footer menu (database)
 	}
 
 	.four {
-		background-color: $blue-light;
+		background-color: $blue-lighter;
 	}
 }
 

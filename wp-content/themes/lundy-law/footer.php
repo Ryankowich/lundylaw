@@ -29,6 +29,10 @@
 							?>
 							<p>Sign up to receive our bi-monthly e-newsletter.</p>
 
+							<form action="/action_page.php">
+								<input type="text" name="firstname" placeholder="EMAIL">
+								<input type="submit" value="Submit" class="blue button">
+							</form> 
 
 						</div>
 
@@ -43,9 +47,7 @@
 				<div class="shell">
 
 					<p>
-						Lundy Law does business in Pennsylvania and New Jersey as a Pennsylvania Limited Liability Partnership, and in Delaware as a Limited Liability Company. 
-						<br>
-						Legal services in Pennsylvania shall be performed primarily in Philadelphia; New Jersey in Cherry Hill and Delaware in Wilmington. Cases may referred to associated law firms.
+						Lundy Law does business in Pennsylvania and New Jersey as a Pennsylvania Limited Liability Partnership, and in Delaware as a Limited Liability Company. Legal services in Pennsylvania shall be performed primarily in Philadelphia; New Jersey in Cherry Hill and Delaware in Wilmington. Cases may referred to associated law firms.
 					</p>
 					
 					<?php
