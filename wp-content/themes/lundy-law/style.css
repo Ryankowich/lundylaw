@@ -2185,6 +2185,57 @@ div.videoplayer.inset-right {
   background: transparent;
   padding: 0; }
 
+.one.columns {
+  width: 4.33%;
+  padding: 2%; }
+
+.two.columns {
+  width: 12.66%;
+  padding: 2%; }
+
+.three.columns {
+  width: 20.99%;
+  padding: 2%; }
+
+.four.columns {
+  width: 29.32%;
+  padding: 2%; }
+
+.five.columns {
+  width: 37.65%;
+  padding: 2%; }
+
+.six.columns {
+  width: 45.98%;
+  padding: 2%; }
+
+.seven.columns {
+  width: 54.31%;
+  padding: 2%; }
+
+.eight.columns {
+  width: 62.64%;
+  padding: 2%; }
+
+.nine.columns {
+  width: 70.97%;
+  padding: 2%; }
+
+.ten.columns {
+  width: 79.3%;
+  padding: 2%; }
+
+.eleven.columns {
+  width: 87.63%;
+  padding: 2%; }
+
+.twelve.columns {
+  width: 95.96%;
+  padding: 2%; }
+
+.columns {
+  float: left; }
+
 * {
   margin: 0;
   padding: 0;
@@ -2230,16 +2281,6 @@ button {
   line-height: 0;
   display: block;
   clear: both; }
-
-.three.columns {
-  width: 31%;
-  float: left;
-  padding: 1%; }
-
-.two.columns {
-  width: 46%;
-  float: left;
-  padding: 2%; }
 
 .shell {
   width: 960px;

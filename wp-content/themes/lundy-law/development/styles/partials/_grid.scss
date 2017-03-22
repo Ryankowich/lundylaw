@@ -1,0 +1,65 @@
+$column: 8.33%;
+
+.one.columns {
+	width: $column - 4;
+	padding: 2%;
+}
+
+.two.columns {
+	width: $column * 2 - 4;
+	padding: 2%;
+}
+
+.three.columns {
+	width: $column * 3 - 4;
+	padding: 2%;
+}
+
+.four.columns {
+	width: $column * 4 - 4;
+	padding: 2%;
+}
+
+.five.columns {
+	width: $column * 5 - 4;
+	padding: 2%;
+}
+
+.six.columns {
+	width: $column * 6 - 4;
+	padding: 2%;
+}
+
+.seven.columns {
+	width: $column * 7 - 4;
+	padding: 2%;
+}
+
+.eight.columns {
+	width: $column * 8 - 4;
+	padding: 2%;
+}
+
+.nine.columns {
+	width: $column * 9 - 4;
+	padding: 2%;
+}
+
+.ten.columns {
+	width: $column * 10 - 4;
+	padding: 2%;
+}
+
+.eleven.columns {
+	width: $column * 11 - 4;
+	padding: 2%;
+}
+
+.twelve.columns {
+	width: $column * 12 - 4;
+	padding: 2%;
+}
+
+.columns {
+	float: left;
+}

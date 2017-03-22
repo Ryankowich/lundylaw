@@ -13,6 +13,8 @@ updated footer menu (database)
 
 @import 'legacy/style';
 
+@import 'partials/grid';
+
 $questrial: 'Questrial', arial, helvetica, sans-serif;
 $lato: 'Lato', sans-serif;
 
@@ -74,16 +76,6 @@ button {
 .clearfix { *zoom: 1; }
 .clearfix:after { content: ''; font-size: 0; line-height: 0; display: block; clear: both; }
 
-.three.columns {
-	width: 31%;
-	float: left;
-	padding: 1%;
-}
-.two.columns {
-	width: 46%;
-	float: left;
-	padding: 2%;
-}
 
 .shell {
 	width: 960px;
