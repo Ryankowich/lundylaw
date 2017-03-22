@@ -6,7 +6,11 @@
 get_header();
 	the_post(); 
 ?>
-
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			jQuery('#slider1').tinycarousel();
+		});
+	</script>
 	<div class="hero-background white-text">
 		<div class="shell">
 			<h2>
@@ -131,13 +135,6 @@ get_header();
 						</div>
 					</form>
 					<div class="wpcf7-response-output wpcf7-display-none"></div>
-					<!--
-					<a href="/free/" class="form-button">
-						<strong>Get Help Today</strong>
-						Click here to receive a<br />
-						free initial consultation.
-					</a>
-					-->
 				</div>
 				<!-- end of form -->
 			</div>
@@ -146,26 +143,28 @@ get_header();
 
 	<div class="logo-carousel">
 		<div class="shell">
-			<div id="Glide" class="glide">
-
-	<!--
-    <div class="glide__arrows">
-        <button class="glide__arrow prev" data-glide-dir="<">prev</button>
-        <button class="glide__arrow next" data-glide-dir=">">next</button>
-    </div>
-    -->
-
-    <div class="glide__wrapper">
-        <ul class="glide__track">
-            <li class="glide__slide">TESTTSUHGFDHGVDU</li>
-            <li class="glide__slide">TESTTSUHGFDHGVDU</li>
-            <li class="glide__slide">TESTTSUHGFDHGVDU</li>
-        </ul>
-    </div>
-
-    <!--<div class="glide__bullets"></div>-->
-
-</div>
+			<div id="slider1">
+				<a class="buttons prev" href="#">&#60;</a>
+				<div class="viewport">
+					<ul class="overview">
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+					</ul>
+					<ul class="overview">
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+						<li>TESTING</li>
+					</ul>
+				</div>
+				<a class="buttons next" href="#">&#62;</a>
+			</div>
 		</div>
 	</div>
 

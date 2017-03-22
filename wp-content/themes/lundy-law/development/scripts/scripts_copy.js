@@ -4,11 +4,7 @@
 
 // maybe try this https://baijs.com/tinycarousel/
 
-jQuery(document).ready(function($) {
-	$("#Glide").glide({
-        type: "carousel"
-    });
-});
+
 
 /***************************************
 *       	ACCORDION SCRIPT	       *
