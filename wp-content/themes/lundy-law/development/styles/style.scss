@@ -17,6 +17,8 @@ updated footer menu (database)
 
 @import 'framework/grid';
 
+@import 'partials/glide-core';
+
 
 .clearfix { *zoom: 1; }
 .clearfix:after { content: ''; font-size: 0; line-height: 0; display: block; clear: both; }
@@ -92,16 +94,51 @@ updated footer menu (database)
 
 }
 
-.element-item span {
-	display: block;
-	position: absolute;
-	top: 50%;
-	color: #fff;
+.element-item {
+	width: 24%;
+	height: auto;
+	padding: 0.5%;
+	line-height: 0;
+	
+	img {
+		width: 240px;
+	}
+	
+	span {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: #fff;
+		width: 100%;
+		text-align: center;
+	}
 }
+
+/*
+//.element-item:nth-child(n+9) {
+.not-auto:nth-child(n+9) {
+	display: none;
+}
+*/
 
 /************************\
 		  HOME
 \************************/
+
+.hero-background {
+	margin-top: 100px;
+	height: 400px;
+	position: relative;
+
+	.shell {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
 
 .page-home .hero-background {
 	background: url(https://www.lundylaw.com/wp-content/uploads/JL-Banner-2.png);
@@ -123,16 +160,7 @@ updated footer menu (database)
 		background-color: $blue;
 	}
 }
-.hero-background {
-	margin-top: 100px;
-	height: 400px;
 
-	h2 {
-		background-color: $blue;
-		display: inline-block;
-		line-height: 35px;
-	}
-}
 .cta {
 	background-color: $blue;
 }

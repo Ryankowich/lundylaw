@@ -30,7 +30,7 @@ html {
 	font-size: 14px;
 }
 
-span, 
+//span, 
 a,
 p {
 	font-family: $lato; 
@@ -44,6 +44,8 @@ a {
 
 p {
 	color: $gray;
+	line-height: 1.5rem;
+	line-height: 1.5;
 }
 
 h1,
@@ -71,6 +73,16 @@ button,
 button.blue,
 .button.blue {
 	background-color: $blue-lighter;
+}
+
+input,
+textarea {
+	font-family: $lato; 
+	font-weight: $reg;
+	border: 0;
+	border-radius: 3px;
+	padding: 10px 6%;
+
 }
 
 .white-text {
@@ -103,6 +115,15 @@ button.blue,
 	}
 }
 
+.highlight {
+	line-height: 54px;
+	padding: 6px 10px;
+}
+
+.highlight.blue {
+	background-color: $blue;
+}
+
 .accordion-toggle {
 	cursor: pointer;
 }
@@ -118,6 +139,20 @@ button.blue,
 .equal-vert-height-container .shell {
 	display: flex;
 	align-items: stretch;
+}
+
+/*****  GET HELP NOW FORM  *****/
+
+.form.get-help-now {
+	input.field, 
+	textarea {
+		width: 88%;
+		padding: 10px 6%;
+	}
+}
+
+.practice-areas {
+	padding: 60px 0;
 }
 
 /*****  FOOTER  *****/

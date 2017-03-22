@@ -1,5 +1,17 @@
 /***************************************
-*       FILTERED PRACTICE AREAS        *
+*			 LOGO SLIDER		       *
+***************************************/
+
+// maybe try this https://baijs.com/tinycarousel/
+
+jQuery(document).ready(function($) {
+	$("#Glide").glide({
+        type: "carousel"
+    });
+});
+
+/***************************************
+*       	ACCORDION SCRIPT	       *
 ***************************************/
 
 jQuery(document).ready(function($) {
@@ -23,10 +35,35 @@ jQuery(document).ready(function($) {
 		itemSelector: '.element-item',
 		layoutMode: 'fitRows'
 	});
+
+	/*
+	var elems = $grid.isotope('getItemElements');
+	$(elems[8]).hide();
+	$(elems[9]).hide();
+	$(elems[10]).hide();
+	$(elems[11]).hide();
+	$(elems[12]).hide();
+	$(elems[13]).hide();
+	$(elems[14]).hide();
+	$(elems[15]).hide();
+	*/
+
 	// filter items on button click
 	$('.filter-button-group').on( 'click', 'button', function() {
+
 		var filterValue = $(this).attr('data-filter');
 		$grid.isotope({ filter: filterValue });
+		/*
+		elems = $grid.isotope('getFilteredItemElements');
+		$(elems[8]).hide().css('translate3d', '0, 0, 0');
+		$(elems[9]).hide().css('translate3d', '0, 0, 0');
+		$(elems[10]).hide().css('translate3d', '0, 0, 0');
+		$(elems[11]).hide().css('translate3d', '0, 0, 0');
+		$(elems[12]).hide().css('translate3d', '0, 0, 0');
+		$(elems[13]).hide().css('translate3d', '0, 0, 0');
+		$(elems[14]).hide().css('translate3d', '0, 0, 0');
+		$(elems[15]).hide().css('translate3d', '0, 0, 0');
+		*/
 	});
 });
 
@@ -34,10 +71,12 @@ jQuery(document).ready(function($) {
 *          HOMEPAGE SLIDESHOW          *
 ***************************************/
 
+/* LM */
+/*
 jQuery(document).ready(function($) {
 	$('.banner-home .flexslider').flexslider({controlNav: false, slideshowSpeed: 4000});
 });
-
+*/
 
 /***************************************
 *      FORM FUNCTIONS/VALIDATIONS      *

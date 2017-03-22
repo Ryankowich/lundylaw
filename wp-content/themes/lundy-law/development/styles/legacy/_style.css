@@ -73,7 +73,10 @@ a { color: #123f99; text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }
 a img { border: 0; }
 
+/* LM */
+/*
 input, textarea, select { font-size: 18px; font-family: 'Times New Roman', serif; }
+*/
 textarea { overflow: auto; }
 
 .clearfix { *zoom: 1; }

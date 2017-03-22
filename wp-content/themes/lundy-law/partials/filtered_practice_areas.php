@@ -20,6 +20,8 @@
 
     	$img = get_the_post_thumbnail ( $post_id, 'thumbnail' );
 
+        //$img = get_the_post_thumbnail ( $post_id, array( 300, 300) );
+
         $title = $menu_item->title;
 
         $url = $menu_item->url;
@@ -32,6 +34,7 @@
         }
 
         $menu_list .= '<div class="element-item ' . $class . '"><a href="' . $url . '">' . $img . '<span>' . $title . '</span>' . '</a></div>';
+
     }
 
     $menu_list .= '</div><br>';
@@ -40,6 +43,8 @@
 	echo $menu_list;
 
 	?>
+
+    <a href="#">VIEW MORE</a><button class="blue">See All Practice Areas</button>
 
 </div>
 

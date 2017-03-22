@@ -10,9 +10,14 @@ get_header();
 	<div class="hero-background white-text">
 		<div class="shell">
 			<h2>
-				Winning hundreds of millions <br>
-				for our clients in Pa, NJ & DE <br>
-				for over 55 years.
+				<span class="highlight blue">Winning hundreds of millions</span>
+				<br>
+				<span class="highlight blue">for our clients in Pa, NJ & DE</span>
+				<br>
+				<span class="highlight blue">for over 55 years.</span>
+				<br>
+				<button class="blue">Meet Our Attorneys</button>
+				<button class="blue">See Practice Areas</button>
 			</h2>
 		</div>
 	</div>
@@ -57,7 +62,7 @@ get_header();
 		</div>
 	</div>
 
-	<div class="faq-section clearfix">
+	<div class="faq-section equal-vert-height-container clearfix">
 		<div class="shell">
 			<div class="eight columns">
 				<h3>Frequently Asked Questions</h3>
@@ -93,7 +98,7 @@ get_header();
 			</div>
 			<div class="four columns">
 				<!-- Static form -->
-				<div class="form">
+				<div class="form get-help-now">
 
 					<form action="/thanks/#wpcf7-f5156-p4-o1" method="post" class="wpcf7-form" novalidate="novalidate">
 					<div style="display: none;">
@@ -104,22 +109,26 @@ get_header();
 						<input type="hidden" name="title" value="Lundy Law | Quick Contact Form">
 					</div>	
 						 <!-- <input type="hidden" name="formuser" value="llw" /> -->
-						<div class="col">
+						<div class="twelve columns">
 							<div class="form-slogan white-text">
 								<h3>Contact Us To Get Help Now</h3>
 							</div>
 							<input type="text" class="field required" name="your-name"  title="Your Name" value="" placeholder="NAME"/>
 						</div>
-						<div class="col">
+						<div class="six columns">
 							<input type="text" class="field required phone-number" name="your-phone" title="Phone Number" value="" placeholder="PHONE"/>
+						</div>
+						<div class="six columns">
 							<input type="text" class="field required email-address" name="your-email" title="Email Address" value="" placeholder="EMAIL"/>
 						</div>
-						<div class="col">
+						<div class="twelve columns">
 							<textarea class="textarea required" name="your-message" title="Message" placeholder="MESSAGE"></textarea>
 						</div>
-						<span class="wpcf7-form-control-wrap pooh-bear-wrap" style="display:none !important;visibility:hidden !important;"><input class="wpcf7-form-control wpcf7-text pooh-bear"  type="text" name="pooh-bear" value="" size="40" tabindex="-1" /><br><small>Please leave this field empty.</small></span>
-						<input type="submit" class="submit-btn wpcf7-form-control wpcf7-submit button" value="Get Help Now" />
-						<img class="ajax-loader" src="http://www.lundylaw.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Sending ..." style="visibility: hidden;">
+						<div class="twelve columns">
+							<span class="wpcf7-form-control-wrap pooh-bear-wrap" style="display:none !important;visibility:hidden !important;"><input class="wpcf7-form-control wpcf7-text pooh-bear"  type="text" name="pooh-bear" value="" size="40" tabindex="-1" /><br><small>Please leave this field empty.</small></span>
+							<input type="submit" class="submit-btn wpcf7-form-control wpcf7-submit button" value="Get Help Now" />
+							<img class="ajax-loader" src="http://www.lundylaw.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Sending ..." style="visibility: hidden;">
+						</div>
 					</form>
 					<div class="wpcf7-response-output wpcf7-display-none"></div>
 					<!--
@@ -137,7 +146,26 @@ get_header();
 
 	<div class="logo-carousel">
 		<div class="shell">
-			LOGOS
+			<div id="Glide" class="glide">
+
+	<!--
+    <div class="glide__arrows">
+        <button class="glide__arrow prev" data-glide-dir="<">prev</button>
+        <button class="glide__arrow next" data-glide-dir=">">next</button>
+    </div>
+    -->
+
+    <div class="glide__wrapper">
+        <ul class="glide__track">
+            <li class="glide__slide">TESTTSUHGFDHGVDU</li>
+            <li class="glide__slide">TESTTSUHGFDHGVDU</li>
+            <li class="glide__slide">TESTTSUHGFDHGVDU</li>
+        </ul>
+    </div>
+
+    <!--<div class="glide__bullets"></div>-->
+
+</div>
 		</div>
 	</div>
 
