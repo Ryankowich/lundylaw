@@ -2290,10 +2290,6 @@ textarea {
       .form.get-help-now form .phone-email-field input:nth-child(2) {
         margin: 10px 0 10px 10px; }
 
-.practice-areas {
-  padding: 60px 0;
-  text-align: center; }
-
 /*****  FILTERED PRACTICE AREAS  *****/
 #filtered-practice-areas .button-group button {
   background-color: transparent;
@@ -2303,6 +2299,14 @@ textarea {
 
 #filtered-practice-areas .button-group button.is-checked {
   color: #2484BC; }
+
+.practice-areas {
+  padding: 60px 0;
+  text-align: center; }
+
+/*****  TESTIMONIALS  *****/
+.testimonials {
+  text-align: center; }
 
 /*****  FOOTER  *****/
 .footer-top {
@@ -2601,6 +2605,19 @@ textarea {
 
 /************************		 OUR FIRM
 \************************/
+.two-descriptors .six.columns.no-padding:nth-child(1) {
+  background-color: #767676;
+  height: 400px; }
+
+.two-descriptors .six.columns.no-padding:nth-child(2) {
+  background-color: #57A0D1;
+  height: 400px; }
+
+.two-descriptors .shell {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); }
+
 .cta {
   background-color: #265B8D;
   padding: 20px auto; }

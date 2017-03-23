@@ -1,3 +1,5 @@
+<!-- TODO: possibly add custom fields -->
+
 <div class="logo-carousel">
 	<div class="shell">
 		<div id="slider1">

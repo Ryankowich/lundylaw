@@ -216,6 +216,30 @@ updated our firm page to use our firm template (database)
 		 OUR FIRM
 \************************/
 
+.two-descriptors {
+
+	.six.columns.no-padding:nth-child(1) {
+		background-color: $gray;
+		height: 400px;
+	}
+			
+	.six.columns.no-padding:nth-child(2) {
+		background-color: $blue-lighter;
+		height: 400px;
+	}
+
+	.shell {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+
+
+
+
+
 
 
 .cta {
