@@ -28,14 +28,14 @@ gulp.task('scripts', function() {
 
 //livereload any php edits
 gulp.task('php', function() {
-	gulp.src('./template-home.php')
-		.pipe(notify("template-home.php updated."))
+	gulp.src('./template-our-firm.php')
+		.pipe(notify("template-our-firm.php updated."))
 		.pipe(livereload());
 });
 
 gulp.task('watch', function () {
 	livereload.listen();
-	gulp.watch('./development/styles/*.scss', ['sass'] );
+	gulp.watch(['./development/styles/*.scss', './development/styles/**/*.scss'], ['sass'] );
 	gulp.watch('./development/scripts/*.js', ['scripts']);
 	gulp.watch('./*.php', ['php']);
 });

@@ -121,7 +121,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		<!-- end of header-bottom -->
 	</div>
 	<!-- end of header -->
-
-	<?php if ( !is_page_template('template-home.php' ) ) : ?>
+	<!--
+	<?php /* if ( !is_page_template('template-home.php' ) ) : ?>
 	<div class="shell">
-	<?php endif; ?>
+	<?php endif; */ ?>
+	-->

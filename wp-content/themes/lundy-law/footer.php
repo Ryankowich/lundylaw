@@ -1,6 +1,8 @@
-		<?php if ( !is_page_template('template-home.php' ) ) : ?>
+		<!--
+		<?php /* if ( !is_page_template('template-home.php' ) ) : ?>
 		</div>
-		<?php endif; ?>
+		<?php endif; */ ?>
+		-->
 		
 		<div id="footer" class="white-text">
 			<div class="footer-top">
