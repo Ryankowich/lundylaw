@@ -59,6 +59,8 @@ img.alignleft { margin: 2px 7px 2px 0; display: inline; }
 
 body, html { height: 100%; }
 
+/* LM */
+/*
 body {
     font-size: 18px;
     line-height: 28px;
@@ -68,6 +70,7 @@ body {
     min-width: 1114px;
     -webkit-text-size-adjust: none;
 }
+*/
 
 a { color: #123f99; text-decoration: none; cursor: pointer; }
 a:hover { text-decoration: underline; }

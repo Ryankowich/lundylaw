@@ -15,7 +15,7 @@
         {
             start: 0
         ,   axis: "x"
-        ,   buttons: true
+        ,   buttons: false
         ,   bullets: false
         ,   interval: true
         ,   intervalTime: 3000

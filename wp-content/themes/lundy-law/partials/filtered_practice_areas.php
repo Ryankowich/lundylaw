@@ -3,9 +3,10 @@
 <div id="filtered-practice-areas" class="sections">
 
     <div class="button-group filter-button-group">
-        <button data-filter="*">show all</button>
-        <button data-filter=".auto">auto</button>
-        <button data-filter=".not-auto">not auto</button>
+        <button data-filter="*" class="is-checked">Most Searched</button>
+        <button data-filter=".personal-injury">Personal Injury</button>
+        <button data-filter=".work-related">Work Related</button>
+        <button data-filter=".auto">Automobiles</button>
     </div>
 
 	<?php 
@@ -30,7 +31,7 @@
         if (strpos($title, 'Auto') !== false) {
             $class = 'auto';
         } else {
-            $class = 'not-auto';
+            $class = 'personal-injury';
         }
 
         $menu_list .= '<div class="element-item ' . $class . '"><a href="' . $url . '">' . $img . '<span>' . $title . '</span>' . '</a></div>';

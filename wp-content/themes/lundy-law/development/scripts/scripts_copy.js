@@ -61,6 +61,16 @@ jQuery(document).ready(function($) {
 		$(elems[15]).hide().css('translate3d', '0, 0, 0');
 		*/
 	});
+
+		// change is-checked class on buttons
+	$('.button-group').each( function( i, buttonGroup ) {
+		var $buttonGroup = $( buttonGroup );
+		$buttonGroup.on( 'click', 'button', function() {
+			$buttonGroup.find('.is-checked').removeClass('is-checked');
+			$( this ).addClass('is-checked');
+		});
+	});
+
 });
 
 /***************************************

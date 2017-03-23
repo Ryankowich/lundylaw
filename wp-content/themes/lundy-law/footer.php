@@ -31,8 +31,27 @@
 
 							<form action="/action_page.php">
 								<input type="text" name="firstname" placeholder="EMAIL">
-								<input type="submit" value="Submit" class="blue button">
+								<input type="submit" value="Submit" class="button">
 							</form> 
+
+							<div class="social-media">
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+								</span>
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+								</span>
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
+								</span>
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+								</span>
+							</div>
 
 						</div>
 

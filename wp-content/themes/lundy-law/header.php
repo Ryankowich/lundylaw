@@ -33,6 +33,7 @@
 
 <script src='https://www.google.com/recaptcha/api.js'></script> 
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+<script src="https://use.fontawesome.com/4a2e2e2cda.js"></script>
 </head>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

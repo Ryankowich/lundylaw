@@ -32,11 +32,11 @@ get_header();
 				<p>We help injured people in Pennsylvania, New Jersey, and Delaware with offices throughout the Delaware Valley and Lehigh Valley, including Philadelphia, Cherry Hill, Wilmington, Bethlehem, and Reading.</p>
 			</div>
 			<div class="four columns">
-				<h3>Our Service Areas</h3>
+				<h3>If We Don't Win, You Don't Pay</h3>
 				<p>We get the results they need. We’ve collected hundreds of millions of dollars in settlements and successful verdicts for our clients.</p>
 			</div>
 			<div class="four columns">
-				<h3>Our Service Areas</h3>
+				<h3>We Care About Your Case</h3>
 				<p>We take cases that other firms won’t. That’s because we care about helping people, no matter how hard the challenge.</p>
 			</div>
 		</div>
@@ -51,7 +51,7 @@ get_header();
 		</div>
 	</div>
 
-	<div class="cta clearfix">
+	<div class="cta equal-vert-height-container clearfix">
 		<div class="shell">
 			<div class="eight columns white-text">
 				<h3>Looking for more information?</h3>
@@ -60,7 +60,7 @@ get_header();
 				</p>
 			</div>
 			<div class="four columns">
-				<button>Resources</button>
+				<button class="blue">Resources</button>
 				<button>Get Help Now</button>
 			</div>
 		</div>
@@ -84,13 +84,13 @@ get_header();
 						    foreach ( $faq as $post ) :
 						        setup_postdata( $post ); ?>
 								<div class="faq twelve columns">
-									<h5 class="accordion-toggle blue-text">
+									<h4 class="accordion-toggle blue-text">
 										<?php the_title(); ?>
-									</h5>
-									<h6 class="accordion-content">
+									</h4>
+									<div class="accordion-content">
 										<?php the_content(); ?>
 										<a href="<?php the_permalink(); ?>">Read More...</a>
-									</h6>
+									</div>
 								</div>
 						    <?php
 						    endforeach; 
@@ -113,19 +113,17 @@ get_header();
 						<input type="hidden" name="title" value="Lundy Law | Quick Contact Form">
 					</div>	
 						 <!-- <input type="hidden" name="formuser" value="llw" /> -->
-						<div class="twelve columns">
+						<div class="twelve columns name-field">
 							<div class="form-slogan white-text">
 								<h3>Contact Us To Get Help Now</h3>
 							</div>
 							<input type="text" class="field required" name="your-name"  title="Your Name" value="" placeholder="NAME"/>
 						</div>
-						<div class="six columns">
+						<div class="twelve columns phone-email-field">
 							<input type="text" class="field required phone-number" name="your-phone" title="Phone Number" value="" placeholder="PHONE"/>
-						</div>
-						<div class="six columns">
 							<input type="text" class="field required email-address" name="your-email" title="Email Address" value="" placeholder="EMAIL"/>
 						</div>
-						<div class="twelve columns">
+						<div class="twelve columns message-field">
 							<textarea class="textarea required" name="your-message" title="Message" placeholder="MESSAGE"></textarea>
 						</div>
 						<div class="twelve columns">
@@ -147,20 +145,11 @@ get_header();
 				<a class="buttons prev" href="#">&#60;</a>
 				<div class="viewport">
 					<ul class="overview">
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-					</ul>
-					<ul class="overview">
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
-						<li>TESTING</li>
+						<li><img src="http://findicons.com/files/icons/1341/summertime_snacks/128/cheeseburger.png"></li>
+						<li><img src="http://findicons.com/files/icons/1341/summertime_snacks/128/cheeseburger.png"></li>
+						<li><img src="http://findicons.com/files/icons/1341/summertime_snacks/128/cheeseburger.png"></li>
+						<li><img src="http://findicons.com/files/icons/1341/summertime_snacks/128/cheeseburger.png"></li>
+						<li><img src="http://findicons.com/files/icons/1341/summertime_snacks/128/cheeseburger.png"></li>
 					</ul>
 				</div>
 				<a class="buttons next" href="#">&#62;</a>
