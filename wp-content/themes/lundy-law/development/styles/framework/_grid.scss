@@ -30,6 +30,11 @@ $column: 8.33%;
 	padding: 2%;
 }
 
+.six.columns.no-padding {
+	width: $column * 6;
+	padding: 0;
+}
+
 .seven.columns {
 	width: $column * 7 - 4;
 	padding: 2%;

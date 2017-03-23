@@ -2363,6 +2363,10 @@ textarea {
   width: 45.98%;
   padding: 2%; }
 
+.six.columns.no-padding {
+  width: 49.98%;
+  padding: 0; }
+
 .seven.columns {
   width: 54.31%;
   padding: 2%; }
@@ -2595,6 +2599,8 @@ textarea {
       display: inline-block;
       margin-left: -30px; }
 
+/************************		 OUR FIRM
+\************************/
 .cta {
   background-color: #265B8D;
   padding: 20px auto; }
