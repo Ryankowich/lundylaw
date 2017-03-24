@@ -2199,11 +2199,20 @@ button,
   padding: 7px 13px;
   text-transform: uppercase;
   cursor: pointer;
-  margin: 0 12px; }
+  margin: 0 12px;
+  transition: all 0.3s; }
+
+button:hover,
+.button:hover {
+  background-color: #e6a100; }
 
 button.blue,
 .button.blue {
   background-color: #57A0D1; }
+
+button.blue:hover,
+.button.blue:hover {
+  background-color: #2484BC; }
 
 input,
 textarea {
@@ -2400,25 +2409,35 @@ textarea {
   float: left; }
 
 /* Tiny Carousel */
-#logo-carousel, #testimonial-slider {
+#logo-carousel,
+#testimonial-slider,
+#our-firm-slider {
   height: 1%;
   overflow: hidden;
   position: relative;
   padding: 10px 50px 10px; }
-  #logo-carousel .viewport, #testimonial-slider .viewport {
+  #logo-carousel .viewport,
+  #testimonial-slider .viewport,
+  #our-firm-slider .viewport {
     height: 125px;
     overflow: hidden;
     position: relative; }
-  #logo-carousel .disable, #testimonial-slider .disable {
+  #logo-carousel .disable,
+  #testimonial-slider .disable,
+  #our-firm-slider .disable {
     visibility: hidden; }
-  #logo-carousel .overview li, #testimonial-slider .overview li {
+  #logo-carousel .overview li,
+  #testimonial-slider .overview li,
+  #our-firm-slider .overview li {
     float: left;
     margin: 0 20px 0 0;
     padding: 1px;
     height: 121px;
     width: 282px;
     text-align: center; }
-    #logo-carousel .overview li img, #testimonial-slider .overview li img {
+    #logo-carousel .overview li img,
+    #testimonial-slider .overview li img,
+    #our-firm-slider .overview li img {
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%); }
@@ -2435,9 +2454,11 @@ textarea {
   left: 0;
   top: 0; }
 
-#testimonial-slider {
+#testimonial-slider,
+#our-firm-slider {
   margin-bottom: 30px; }
-  #testimonial-slider .buttons {
+  #testimonial-slider .buttons,
+  #our-firm-slider .buttons {
     background: #fff;
     border-radius: 35px;
     display: block;
@@ -2451,15 +2472,19 @@ textarea {
     text-align: center;
     line-height: 35px;
     text-decoration: none;
-    font-size: 22px; }
-  #testimonial-slider .buttons:hover {
+    font-size: 22px;
+    transition: 0.3s all; }
+  #testimonial-slider .buttons:hover,
+  #our-firm-slider .buttons:hover {
     color: #fff;
     background: #767676; }
-  #testimonial-slider .next {
+  #testimonial-slider .next,
+  #our-firm-slider .next {
     right: 0;
     left: auto;
     top: 50%; }
-  #testimonial-slider .overview {
+  #testimonial-slider .overview,
+  #our-firm-slider .overview {
     list-style: none;
     position: absolute;
     padding: 0;
@@ -2467,7 +2492,8 @@ textarea {
     width: 660px;
     left: 0;
     top: 0; }
-    #testimonial-slider .overview li {
+    #testimonial-slider .overview li,
+    #our-firm-slider .overview li {
       width: 656px; }
 
 .clearfix {
@@ -2631,6 +2657,16 @@ textarea {
   position: absolute;
   left: 50%;
   transform: translateX(-50%); }
+
+.meet-our-founder {
+  margin: 40px 0; }
+  .meet-our-founder img {
+    float: right; }
+
+.clients-first-section {
+  background-color: #E3E3E3; }
+  .clients-first-section .four {
+    background-color: #57A0D1; }
 
 .cta {
   background-color: #265B8D;

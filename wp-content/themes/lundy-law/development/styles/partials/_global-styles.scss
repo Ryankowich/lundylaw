@@ -16,6 +16,7 @@ $blue-light: #2484BC;
 $blue: #265B8D;
 $blue-dark: #15304A;
 $yellow: #FFBF2E;
+$yellow-button-hover: #e6a100;
 $gray-light: #E3E3E3;
 $gray: #767676;
 
@@ -83,11 +84,21 @@ button,
 	text-transform: uppercase;
 	cursor: pointer;
 	margin: 0 12px;
+	transition: all 0.3s;
+}
+button:hover,
+.button:hover {
+	background-color: $yellow-button-hover;
 }
 
 button.blue,
 .button.blue {
 	background-color: $blue-lighter;
+}
+
+button.blue:hover,
+.button.blue:hover {
+	background-color: $blue-light;	
 }
 
 input,

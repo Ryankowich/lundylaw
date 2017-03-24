@@ -6,7 +6,7 @@
 			<br>
 			<span class="highlight blue"><?php echo get_post_meta($post->ID, 'highlighted-text-line-2', true); ?></span>
 			<br>
-			<span class="highlight blue"><?php echo get_post_meta($post->ID, 'highlighted-text-line-2', true); ?></span>
+			<span class="highlight blue"><?php echo get_post_meta($post->ID, 'highlighted-text-line-3', true); ?></span>
 			<br>
 			<button class="blue">Meet Our Attorneys</button>
 

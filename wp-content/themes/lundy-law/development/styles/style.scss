@@ -241,12 +241,22 @@ updated our firm page to use our firm template (database)
 	}
 }
 
+.meet-our-founder {
+	margin: 40px 0;
+
+	img {
+		float: right;
+	}
+} 
+
+.clients-first-section {
+	background-color: $gray-light;
 
 
-
-
-
-
+	.four {
+		background-color: $blue-lighter;
+	}
+}
 
 .cta {
 	background-color: $blue;

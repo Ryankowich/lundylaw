@@ -1,5 +1,7 @@
 /* Tiny Carousel */
-#logo-carousel, #testimonial-slider {
+#logo-carousel,
+#testimonial-slider,
+#our-firm-slider {
     height: 1%;
     //margin: 30px 0 0;
     overflow: hidden;
@@ -52,7 +54,8 @@
     }
 }
 
-#testimonial-slider {
+#testimonial-slider,
+#our-firm-slider {
     margin-bottom: 30px;
 
     .buttons {
@@ -70,6 +73,7 @@
         line-height: 35px;
         text-decoration: none;
         font-size: 22px;
+        transition: 0.3s all;
     }
 
     .buttons:hover {
