@@ -46,7 +46,6 @@ get_header();
 			
 			<!-- will need to set up functionality here -->
 			<div id="our-firm-slider">
-				<a class="buttons prev" href="#"><i class="fa fa-chevron-left"></i></a>
 				<div class="viewport">
 					<ul class="overview">
 						<li>
@@ -60,6 +59,7 @@ get_header();
 						</li>
 					</ul>
 				</div>
+				<a class="buttons prev" href="#"><i class="fa fa-chevron-left"></i></a>
 				<a class="buttons next" href="#"><i class="fa fa-chevron-right"></i></a>
 			</div>
 

@@ -2334,8 +2334,10 @@ textarea {
       .footer-top ul li :last-child {
         clear: both; }
 
-.social-media .fa-circle {
-  color: #2484BC; }
+.social-media {
+  margin-top: 15px; }
+  .social-media .fa-circle {
+    color: #2484BC; }
 
 .footer-bottom {
   background-color: #15304A;
@@ -2454,11 +2456,19 @@ textarea {
   left: 0;
   top: 0; }
 
-#testimonial-slider,
-#our-firm-slider {
+#testimonial-slider {
   margin-bottom: 30px; }
-  #testimonial-slider .buttons,
-  #our-firm-slider .buttons {
+  #testimonial-slider .overview {
+    list-style: none;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 660px;
+    left: 0;
+    top: 0; }
+    #testimonial-slider .overview li {
+      width: 656px; }
+  #testimonial-slider .buttons {
     background: #fff;
     border-radius: 35px;
     display: block;
@@ -2474,27 +2484,47 @@ textarea {
     text-decoration: none;
     font-size: 22px;
     transition: 0.3s all; }
-  #testimonial-slider .buttons:hover,
-  #our-firm-slider .buttons:hover {
+  #testimonial-slider .buttons:hover {
     color: #fff;
     background: #767676; }
-  #testimonial-slider .next,
-  #our-firm-slider .next {
+  #testimonial-slider .next {
     right: 0;
-    left: auto;
-    top: 50%; }
-  #testimonial-slider .overview,
+    left: auto; }
+
+#our-firm-slider {
+  padding: 0 0 30px 0; }
   #our-firm-slider .overview {
     list-style: none;
     position: absolute;
     padding: 0;
     margin: 0;
-    width: 660px;
+    width: 340px;
     left: 0;
     top: 0; }
-    #testimonial-slider .overview li,
     #our-firm-slider .overview li {
-      width: 656px; }
+      width: 334px; }
+  #our-firm-slider .buttons {
+    background: transparent;
+    border-radius: 35px;
+    display: block;
+    position: absolute;
+    top: 80%;
+    left: 0;
+    width: 35px;
+    height: 35px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    font-size: 22px;
+    transition: 0.3s all; }
+  #our-firm-slider .buttons:hover {
+    color: #57A0D1;
+    background: #fff; }
+  #our-firm-slider .next {
+    right: auto;
+    left: 40px; }
 
 .clearfix {
   *zoom: 1; }
@@ -2583,14 +2613,9 @@ textarea {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 300;
-    letter-spacing: 0.3px; }
+    letter-spacing: 0.3px;
+    pointer-events: none; }
 
-/*
-//.element-item:nth-child(n+9) {
-.not-auto:nth-child(n+9) {
-	display: none;
-}
-*/
 /************************		  HOME
 \************************/
 .hero-background {

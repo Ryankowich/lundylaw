@@ -135,15 +135,10 @@ updated our firm page to use our firm template (database)
 		font-size: 1.2rem;
 		font-weight: $light;
 		letter-spacing: 0.3px;
+		pointer-events: none;
 	}
 }
 
-/*
-//.element-item:nth-child(n+9) {
-.not-auto:nth-child(n+9) {
-	display: none;
-}
-*/
 
 /************************\
 		  HOME
