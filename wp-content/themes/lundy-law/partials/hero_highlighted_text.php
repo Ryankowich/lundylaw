@@ -1,6 +1,3 @@
-<!--
-	these fields must be created and filled in on the backend of every page that this applies to
--->
 <div class="hero-background white-text">
 	<div class="shell">
 		<h2>

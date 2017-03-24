@@ -8,7 +8,7 @@ get_header();
 ?>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			jQuery('#slider1').tinycarousel();
+			jQuery('#logo-carousel').tinycarousel();
 		});
 	</script>
 	
