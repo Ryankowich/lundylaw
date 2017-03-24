@@ -53,9 +53,10 @@
 }
 
 #testimonial-slider {
+    margin-bottom: 30px;
 
     .buttons {
-        background: #C01313;
+        background: #fff;
         border-radius: 35px;
         display: block;
         position: absolute;
@@ -63,7 +64,7 @@
         left: 0;
         width: 35px;
         height: 35px;
-        color: #fff;
+        color: $gray;
         font-weight: bold;
         text-align: center;
         line-height: 35px;
@@ -72,8 +73,8 @@
     }
 
     .buttons:hover {
-        color: #C01313;
-        background: #fff;
+        color: #fff;
+        background: $gray;
     }
 
     .next {

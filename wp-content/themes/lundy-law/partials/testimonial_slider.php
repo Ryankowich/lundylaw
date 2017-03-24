@@ -6,7 +6,7 @@
 		<div class="ten columns">
 			<i class="fa fa-quote-left fa-3x"></i>
 			<div id="testimonial-slider">
-				<a class="buttons prev" href="#">&#60;</a>
+				<a class="buttons prev" href="#"><i class="fa fa-chevron-left"></i></a>
 				<div class="viewport">
 					<ul class="overview">
 						<li>
@@ -21,10 +21,9 @@
 						</li>
 					</ul>
 				</div>
-				<a class="buttons next" href="#">&#62;</a>
+				<a class="buttons next" href="#"><i class="fa fa-chevron-right"></i></a>
 			</div>
-
-
+			<button class="blue">View All Testimonials</button>
 		</div>
 	</div>
 </div>
