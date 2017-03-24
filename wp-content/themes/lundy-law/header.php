@@ -82,7 +82,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			<div class="shell clearfix">
 				<span><?php echo do_shortcode('[gtranslate]'); ?></span>
 				<span><a href="javascript:StartNgageChat();">Live Chat</a></span>
-				<span class="phone">215-567-3000</span>
+				<span><i class="fa fa-phone"></i> 215-567-3000</span>
 				<span><button>GET HELP NOW</button></span>
 			</div>
 		</div>

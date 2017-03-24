@@ -3,11 +3,13 @@
 // try https://purecss.io/grids/
 
 /************************\
+
 Notes:
 
 removed hablamos espanol menu items (database)
 updated footer menu (database)
 updated our firm page to use our firm template (database)
+
 \************************/
 
 @import 'legacy/fonts';
@@ -20,9 +22,17 @@ updated our firm page to use our firm template (database)
 
 @import 'partials/tiny-carousel';
 
+.clearfix { 
+	*zoom: 1;
+}
 
-.clearfix { *zoom: 1; }
-.clearfix:after { content: ''; font-size: 0; line-height: 0; display: block; clear: both; }
+.clearfix:after { 
+	content: '';
+	font-size: 0;
+	line-height: 0;
+	display: block;
+	clear: both;
+}
 
 .shell {
 	width: 960px;
@@ -86,6 +96,8 @@ updated our firm page to use our firm template (database)
 
 	span {
 		margin-left: 20px;
+		font-family: $lato;
+		font-weight: $light;
 	}
 
 	span, a {
@@ -233,6 +245,15 @@ updated our firm page to use our firm template (database)
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
+		height: 400px;
+
+		//clean this up
+		.six.columns:nth-child(2) {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translateY(-50%);
+		}
 	}
 }
 

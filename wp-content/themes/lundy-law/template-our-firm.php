@@ -40,11 +40,8 @@ get_header();
 		</div>
 		<div class="six columns white-text">
 			<h3>Lundy Law Personal Injury Attorneys</h3>
-			<p>Our personal injury lawyers know that your injuries can change your life — causing serious disability, personal turmoil, and the loss of your job and routine.</p>
-			<p>We’re here to help people like you get their lives back to normal. If you’ve been hurt in an accident, we want to help. At Lundy Law, we know the justice system, and we know how to get accident victims the results they need. Contact us today.</p>
-
 			
-			<!-- will need to set up functionality here -->
+			<!-- will need to set up custom fields functionality here -->
 			<div id="our-firm-slider">
 				<div class="viewport">
 					<ul class="overview">

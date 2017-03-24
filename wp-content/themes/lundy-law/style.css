@@ -1,8 +1,10 @@
-/************************Notes:
+/************************
+Notes:
 
 removed hablamos espanol menu items (database)
 updated footer menu (database)
 updated our firm page to use our firm template (database)
+
 \************************/
 @font-face {
   font-family: 'TradeGothicLTStdBdCn20';
@@ -2493,16 +2495,20 @@ textarea {
 
 #our-firm-slider {
   padding: 0 0 30px 0; }
+  #our-firm-slider .viewport {
+    height: 200px; }
   #our-firm-slider .overview {
     list-style: none;
     position: absolute;
     padding: 0;
     margin: 0;
-    width: 340px;
+    width: 440px;
     left: 0;
     top: 0; }
     #our-firm-slider .overview li {
-      width: 334px; }
+      width: 434px;
+      text-align: left;
+      height: 100%; }
   #our-firm-slider .buttons {
     background: transparent;
     border-radius: 35px;
@@ -2580,7 +2586,9 @@ textarea {
   background: #265B8D;
   line-height: 40px; }
   .pre-nav span {
-    margin-left: 20px; }
+    margin-left: 20px;
+    font-family: "Lato", sans-serif;
+    font-weight: 300; }
   .pre-nav span, .pre-nav a {
     color: #fff;
     font-size: 1rem; }
@@ -2681,7 +2689,13 @@ textarea {
 .two-descriptors .shell {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%); }
+  transform: translateX(-50%);
+  height: 400px; }
+  .two-descriptors .shell .six.columns:nth-child(2) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%); }
 
 .meet-our-founder {
   margin: 40px 0; }
