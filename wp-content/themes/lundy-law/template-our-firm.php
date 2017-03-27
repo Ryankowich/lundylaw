@@ -68,7 +68,7 @@ get_header();
 <div class="meet-our-founder clearfix">
 	<div class="shell">
 		<div class="six columns">
-			<img src="/lundylaw/wp-content/themes/lundy-law/images-add_to_live_after_dev/marvin-lundy-headshot.png" alt="">
+			<img src="../wp-content/themes/lundy-law/images-add_to_live_after_dev/marvin-lundy-headshot.png" alt="">
 		</div>
 		<div class="six columns">
 			<h3>Meet Our Founder</h3>
@@ -85,7 +85,7 @@ get_header();
 	<div class="shell">
 		<div class="eight columns">
 			<h3>Putting Clients First</h3>
-			<img src="/lundylaw/wp-content/themes/lundy-law/images-add_to_live_after_dev/lundy-video-still.png" alt="">
+			<img src="../wp-content/themes/lundy-law/images-add_to_live_after_dev/lundy-video-still.png" alt="">
 			<p>At Lundy Law, our personal injury attorneys know that when it’s between money and people, people come first every single time. That’s why we pride ourselves on taking cases that other law firms won’t—we aren’t afraid to take cases that might not be the easiest to win, but that stand to help the people who need it most.</p>
 			<p>No matter what happened to you, if you’ve been injured in an accident, contact Lundy Law. Fill out a free initial consultation form or call us at 1-800-LundyLaw® today. Our bilingual professionals can assist you in English or Spanish, so call now.</p>
 		</div>
