@@ -93,7 +93,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			<div class="shell clearfix">
 				<div class="logo">
 					<a href="/">
-						<img src="http://localhost:8888/lundylaw/wp-content/uploads/TopBanner.jpg">
+					<?php 
+						if ($template_class == "page-home") {
+							echo '<img src="./wp-content/uploads/TopBanner.jpg">';
+						} else {
+							echo '<img src="../wp-content/uploads/TopBanner.jpg">';
+						}
+					?>
 					</a>
 				</div>
 				<div id="navigation">
